@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Backend Development - Yasamin Soraghi">
+  <title>Backend Development - Yasamin Soraghi</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Home">Yasamin Soraghi</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="work.html" class="nav__link">Work</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Field Hero -->
+  <section class="field-hero">
+    <div class="container">
+      <h1 class="field-hero__title">Backend Development</h1>
+      <p class="field-hero__description">
+        Currently learning backend development with Python and PHP. I'm building my understanding of server-side 
+        programming, APIs, databases, and how the web works behind the scenes. This is an exciting journey as I 
+        expand from frontend into full-stack development.
+      </p>
+    </div>
+  </section>
+
+  <!-- My Approach -->
+  <section class="field-approach">
+    <div class="container">
+      <h2 class="section__title">My Approach</h2>
+      <ul class="field-approach__list">
+        <li class="field-approach__item">
+          <strong>Learning Fundamentals:</strong> Starting with core concepts like HTTP, REST APIs, and database design.
+        </li>
+        <li class="field-approach__item">
+          <strong>Python First:</strong> Building REST APIs and understanding server-side logic with Python and Flask.
+        </li>
+        <li class="field-approach__item">
+          <strong>PHP for WordPress:</strong> Learning PHP to create custom WordPress themes and plugins.
+        </li>
+        <li class="field-approach__item">
+          <strong>Security Awareness:</strong> Understanding authentication, validation, and secure coding practices.
+        </li>
+        <li class="field-approach__item">
+          <strong>Practical Projects:</strong> Building real projects to apply what I learn and understand the full stack.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="field-skills">
+    <div class="container">
+      <h2 class="section__title">Backend Skills (Learning)</h2>
+      <ul class="field-skills__list">
+        <li class="field-skills__item">Python</li>
+        <li class="field-skills__item">PHP</li>
+        <li class="field-skills__item">REST APIs</li>
+        <li class="field-skills__item">Flask</li>
+        <li class="field-skills__item">HTTP/HTTPS</li>
+        <li class="field-skills__item">Database Basics</li>
+        <li class="field-skills__item">Authentication</li>
+        <li class="field-skills__item">Server-side Validation</li>
+        <li class="field-skills__item">Error Handling</li>
+        <li class="field-skills__item">Security Best Practices</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Backend Projects</h2>
+      <div class="projects-grid" id="projects-container"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="field-faq">
+    <div class="container">
+      <h2 class="section__title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-item__question">What backend technologies are you learning?</div>
+        <div class="faq-item__answer">
+          I'm currently focused on Python (with Flask) and PHP. Python for building REST APIs and understanding 
+          server-side logic, and PHP primarily for WordPress development and custom backend solutions.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Do you have experience with databases?</div>
+        <div class="faq-item__answer">
+          I'm learning database fundamentals and how to integrate databases with backend applications. This is 
+          an area I'm actively exploring as part of my backend learning journey.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Are you planning to become full-stack?</div>
+        <div class="faq-item__answer">
+          Yes! My goal is to become a well-rounded full-stack developer. I'm building strong frontend foundations 
+          first, then expanding into backend technologies to understand the complete web development picture.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__container">
+      <p class="footer__name">Fatemeh Soraghi (Yasamin)</p>
+      <ul class="footer__links">
+        <li><a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+        <li><a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram</a></li>
+        <li><a href="mailto:fatemeh.s8424@gmail.com" class="footer__link">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initProjectsPage('backend');
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yasamin Soraghi - Frontend Developer, Backend Learner, WordPress & Motion Graphics Enthusiast">
+  <title>Yasamin Soraghi - Portfolio</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Home">Yasamin Soraghi</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link active">Home</a></li>
+          <li><a href="work.html" class="nav__link">Work</a></li>
+          <li><a href="#skills" class="nav__link">Skills</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" role="main">
+    <div class="hero__content">
+      <h1 class="hero__headline">Building clean interfaces.<br>Adding motion with purpose.</h1>
+      <p class="hero__subtext">
+        I'm a frontend-focused developer currently expanding my skills into backend development (Python/PHP), 
+        WordPress customization, and motion graphics (After Effects, Photoshop, Illustrator). 
+        I'm passionate about creating beautiful, functional interfaces and learning the fundamentals of UI/UX design.
+      </p>
+      <div class="hero__buttons">
+        <a href="work.html" class="btn btn--primary">View My Work</a>
+        <a href="contact.html" class="btn btn--secondary">Contact Me</a>
+      </div>
+      <div class="hero__quick-links">
+        <a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="hero__quick-link">GitHub</a>
+        <a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="hero__quick-link">Telegram</a>
+        <a href="mailto:fatemeh.s8424@gmail.com" class="hero__quick-link">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Spotlight -->
+  <section id="skills" class="section skills-spotlight">
+    <div class="container">
+      <h2 class="section__title">Skills Spotlight</h2>
+      <div class="skills-grid">
+        <a href="frontend.html" class="skill-tile">
+          <span class="skill-tile__icon">💻</span>
+          <h3 class="skill-tile__title">Frontend</h3>
+          <p class="skill-tile__description">HTML, CSS, JavaScript, and modern web development practices</p>
+        </a>
+        <a href="backend.html" class="skill-tile">
+          <span class="skill-tile__icon">⚙️</span>
+          <h3 class="skill-tile__title">Backend</h3>
+          <p class="skill-tile__description">Python, PHP, and learning server-side development</p>
+        </a>
+        <a href="wordpress.html" class="skill-tile">
+          <span class="skill-tile__icon">🔧</span>
+          <h3 class="skill-tile__title">WordPress</h3>
+          <p class="skill-tile__description">Custom themes, plugins, and WordPress development</p>
+        </a>
+        <a href="motion.html" class="skill-tile">
+          <span class="skill-tile__icon">🎬</span>
+          <h3 class="skill-tile__title">Motion Graphics</h3>
+          <p class="skill-tile__description">After Effects, Photoshop, Illustrator, and animation</p>
+        </a>
+      </div>
+      <div class="skills-chips">
+        <span class="skill-chip">HTML</span>
+        <span class="skill-chip">CSS</span>
+        <span class="skill-chip">JavaScript</span>
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">PHP</span>
+        <span class="skill-chip">WordPress</span>
+        <span class="skill-chip">Illustrator</span>
+        <span class="skill-chip">Photoshop</span>
+        <span class="skill-chip">After Effects</span>
+        <span class="skill-chip">UI/UX</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Featured Work</h2>
+      <div class="work-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="wordpress">WordPress</button>
+        <button class="filter-btn" data-filter="motion">Motion</button>
+        <button class="filter-btn" data-filter="backend">Backend</button>
+      </div>
+      <div class="projects-grid" id="featured-projects"></div>
+    </div>
+  </section>
+
+  <!-- Toolkit Section -->
+  <section class="section toolkit">
+    <div class="container">
+      <h2 class="section__title">My Toolkit</h2>
+      <div class="toolkit-grid">
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">📝</div>
+          <div class="toolkit-item__name">HTML5</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">🎨</div>
+          <div class="toolkit-item__name">CSS3</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">⚡</div>
+          <div class="toolkit-item__name">JavaScript</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">🐍</div>
+          <div class="toolkit-item__name">Python</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">🔷</div>
+          <div class="toolkit-item__name">PHP</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">📦</div>
+          <div class="toolkit-item__name">WordPress</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">🎬</div>
+          <div class="toolkit-item__name">After Effects</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">🖼️</div>
+          <div class="toolkit-item__name">Photoshop</div>
+        </div>
+        <div class="toolkit-item">
+          <div class="toolkit-item__icon">✏️</div>
+          <div class="toolkit-item__name">Illustrator</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section class="section about-preview">
+    <div class="container">
+      <div class="about-preview__content">
+        <h2 class="section__title">About Me</h2>
+        <p class="about-preview__text">
+          I'm a 19-year-old developer passionate about creating beautiful, functional web experiences. 
+          My journey started with frontend development, and I'm continuously expanding my skills into 
+          backend technologies, WordPress, and motion graphics. I believe in building strong fundamentals 
+          before moving to frameworks, which is why I focus on vanilla JavaScript and core web technologies.
+        </p>
+        <a href="about.html" class="btn btn--secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-cta">
+        <h2 class="contact-cta__title">Let's Work Together</h2>
+        <p class="contact-cta__text">Have a project in mind? I'd love to hear about it.</p>
+        <a href="contact.html" class="btn btn--primary">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__container">
+      <p class="footer__name">Fatemeh Soraghi (Yasamin)</p>
+      <ul class="footer__links">
+        <li><a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+        <li><a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram</a></li>
+        <li><a href="mailto:fatemeh.s8424@gmail.com" class="footer__link">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    // Initialize featured projects on home page
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('featured-projects');
+      if (container) {
+        // Load and display all projects initially
+        const projects = await loadProjects();
+        displayProjects(projects.slice(0, 6), container); // Show first 6 projects
+        
+        // Set up filters for featured section
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+          btn.addEventListener('click', async () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter || 'all';
+            const allProjects = await loadProjects();
+            let filtered = filterProjects(allProjects, filter);
+            // Show up to 6 projects
+            displayProjects(filtered.slice(0, 6), container);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

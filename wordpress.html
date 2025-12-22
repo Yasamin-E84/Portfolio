@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WordPress Development - Yasamin Soraghi">
+  <title>WordPress Development - Yasamin Soraghi</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Home">Yasamin Soraghi</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="work.html" class="nav__link">Work</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Field Hero -->
+  <section class="field-hero">
+    <div class="container">
+      <h1 class="field-hero__title">WordPress Development</h1>
+      <p class="field-hero__description">
+        I create custom WordPress themes and plugins, bringing unique designs to life on the WordPress platform. 
+        My approach combines frontend skills with PHP knowledge to build flexible, maintainable WordPress solutions 
+        that are both beautiful and functional.
+      </p>
+    </div>
+  </section>
+
+  <!-- My Approach -->
+  <section class="field-approach">
+    <div class="container">
+      <h2 class="section__title">My Approach</h2>
+      <ul class="field-approach__list">
+        <li class="field-approach__item">
+          <strong>Custom Themes:</strong> Building WordPress themes from scratch with clean, semantic code and modern CSS.
+        </li>
+        <li class="field-approach__item">
+          <strong>PHP Integration:</strong> Using PHP to create dynamic, data-driven WordPress sites with custom post types and fields.
+        </li>
+        <li class="field-approach__item">
+          <strong>Theme Customization:</strong> Creating flexible themes with WordPress Customizer integration for easy client management.
+        </li>
+        <li class="field-approach__item">
+          <strong>Performance:</strong> Optimizing WordPress sites for speed, following best practices for queries and asset loading.
+        </li>
+        <li class="field-approach__item">
+          <strong>Responsive Design:</strong> Ensuring WordPress themes work perfectly on all devices and screen sizes.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="field-skills">
+    <div class="container">
+      <h2 class="section__title">WordPress Skills</h2>
+      <ul class="field-skills__list">
+        <li class="field-skills__item">WordPress Theme Development</li>
+        <li class="field-skills__item">PHP for WordPress</li>
+        <li class="field-skills__item">Custom Post Types</li>
+        <li class="field-skills__item">WordPress Customizer</li>
+        <li class="field-skills__item">Widget Areas</li>
+        <li class="field-skills__item">Template Hierarchy</li>
+        <li class="field-skills__item">Hooks & Filters</li>
+        <li class="field-skills__item">WordPress Best Practices</li>
+        <li class="field-skills__item">Theme Customization</li>
+        <li class="field-skills__item">Plugin Integration</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">WordPress Projects</h2>
+      <div class="projects-grid" id="projects-container"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="field-faq">
+    <div class="container">
+      <h2 class="section__title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-item__question">Do you build themes from scratch?</div>
+        <div class="faq-item__answer">
+          Yes, I create custom WordPress themes from scratch. This allows for complete control over the design, 
+          functionality, and performance of the site, without unnecessary bloat from parent themes or page builders.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Do you work with page builders?</div>
+        <div class="faq-item__answer">
+          While I can work with page builders when needed, I prefer building custom themes with clean code. 
+          This approach results in faster, more maintainable sites that are easier to customize and update.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Can you create custom plugins?</div>
+        <div class="faq-item__answer">
+          I'm learning WordPress plugin development as part of my PHP and WordPress journey. I can create 
+          simple custom functionality and am expanding my skills in this area.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__container">
+      <p class="footer__name">Fatemeh Soraghi (Yasamin)</p>
+      <ul class="footer__links">
+        <li><a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+        <li><a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram</a></li>
+        <li><a href="mailto:fatemeh.s8424@gmail.com" class="footer__link">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initProjectsPage('wordpress');
+    });
+  </script>
+</body>
+</html>
+

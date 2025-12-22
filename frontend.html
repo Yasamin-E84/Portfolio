@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frontend Development - Yasamin Soraghi">
+  <title>Frontend Development - Yasamin Soraghi</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Home">Yasamin Soraghi</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="work.html" class="nav__link">Work</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Field Hero -->
+  <section class="field-hero">
+    <div class="container">
+      <h1 class="field-hero__title">Frontend Development</h1>
+      <p class="field-hero__description">
+        I specialize in building clean, responsive, and performant user interfaces using HTML, CSS, and vanilla JavaScript. 
+        My focus is on creating accessible, semantic code that works beautifully across all devices. I believe in mastering 
+        the fundamentals before moving to frameworks, which is why I'm building strong foundations in core web technologies.
+      </p>
+    </div>
+  </section>
+
+  <!-- My Approach -->
+  <section class="field-approach">
+    <div class="container">
+      <h2 class="section__title">My Approach</h2>
+      <ul class="field-approach__list">
+        <li class="field-approach__item">
+          <strong>Semantic HTML:</strong> Writing clean, accessible markup that makes sense to both browsers and screen readers.
+        </li>
+        <li class="field-approach__item">
+          <strong>Modern CSS:</strong> Using CSS Grid, Flexbox, and custom properties to create flexible, maintainable layouts.
+        </li>
+        <li class="field-approach__item">
+          <strong>Vanilla JavaScript:</strong> Building interactive experiences with pure JavaScript, focusing on performance and maintainability.
+        </li>
+        <li class="field-approach__item">
+          <strong>Responsive Design:</strong> Ensuring every interface works flawlessly on desktop, tablet, and mobile devices.
+        </li>
+        <li class="field-approach__item">
+          <strong>Performance First:</strong> Optimizing for speed, accessibility, and user experience above all else.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="field-skills">
+    <div class="container">
+      <h2 class="section__title">Frontend Skills</h2>
+      <ul class="field-skills__list">
+        <li class="field-skills__item">HTML5</li>
+        <li class="field-skills__item">CSS3</li>
+        <li class="field-skills__item">JavaScript (ES6+)</li>
+        <li class="field-skills__item">Responsive Design</li>
+        <li class="field-skills__item">CSS Grid & Flexbox</li>
+        <li class="field-skills__item">CSS Variables</li>
+        <li class="field-skills__item">Accessibility (ARIA)</li>
+        <li class="field-skills__item">Performance Optimization</li>
+        <li class="field-skills__item">Cross-browser Compatibility</li>
+        <li class="field-skills__item">UI/UX Fundamentals</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Frontend Projects</h2>
+      <div class="projects-grid" id="projects-container"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="field-faq">
+    <div class="container">
+      <h2 class="section__title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-item__question">Do you use React?</div>
+        <div class="faq-item__answer">
+          Not yet — currently focused on strong fundamentals and planning to learn React next. I believe in mastering 
+          vanilla JavaScript and core web technologies first, which provides a solid foundation for understanding 
+          frameworks and libraries.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">What's your preferred workflow?</div>
+        <div class="faq-item__answer">
+          I prefer a clean, component-like approach even with vanilla JavaScript. I organize code into modules, 
+          use semantic HTML, and maintain a consistent CSS architecture (similar to BEM methodology) for scalability.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Do you work with design tools?</div>
+        <div class="faq-item__answer">
+          Yes, I'm familiar with design fundamentals and use tools like Figma for understanding designs. I also work 
+          with Photoshop and Illustrator for creating assets and graphics.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__container">
+      <p class="footer__name">Fatemeh Soraghi (Yasamin)</p>
+      <ul class="footer__links">
+        <li><a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+        <li><a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram</a></li>
+        <li><a href="mailto:fatemeh.s8424@gmail.com" class="footer__link">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initProjectsPage('frontend');
+    });
+  </script>
+</body>
+</html>
+

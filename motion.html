@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Motion Graphics - Yasamin Soraghi">
+  <title>Motion Graphics - Yasamin Soraghi</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Home">Yasamin Soraghi</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="work.html" class="nav__link">Work</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Field Hero -->
+  <section class="field-hero">
+    <div class="container">
+      <h1 class="field-hero__title">Motion Graphics</h1>
+      <p class="field-hero__description">
+        I create dynamic, engaging motion graphics using After Effects, Photoshop, and Illustrator. From animated 
+        logos to product launches, I combine design principles with animation techniques to bring static designs 
+        to life with purpose and style.
+      </p>
+    </div>
+  </section>
+
+  <!-- My Approach -->
+  <section class="field-approach">
+    <div class="container">
+      <h2 class="section__title">My Approach</h2>
+      <ul class="field-approach__list">
+        <li class="field-approach__item">
+          <strong>Purpose-Driven Animation:</strong> Every motion serves a purpose, enhancing the message rather than distracting from it.
+        </li>
+        <li class="field-approach__item">
+          <strong>After Effects Mastery:</strong> Using After Effects for complex animations, transitions, and cinematic effects.
+        </li>
+        <li class="field-approach__item">
+          <strong>Design First:</strong> Creating assets in Illustrator and Photoshop before animating, ensuring high-quality visuals.
+        </li>
+        <li class="field-approach__item">
+          <strong>Smooth Transitions:</strong> Focusing on easing, timing, and flow to create natural, pleasing animations.
+        </li>
+        <li class="field-approach__item">
+          <strong>Brand Consistency:</strong> Ensuring motion graphics align with brand identity and design systems.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="field-skills">
+    <div class="container">
+      <h2 class="section__title">Motion Graphics Skills</h2>
+      <ul class="field-skills__list">
+        <li class="field-skills__item">After Effects</li>
+        <li class="field-skills__item">Photoshop</li>
+        <li class="field-skills__item">Illustrator</li>
+        <li class="field-skills__item">Logo Animation</li>
+        <li class="field-skills__item">Motion Design</li>
+        <li class="field-skills__item">Typography Animation</li>
+        <li class="field-skills__item">Particle Effects</li>
+        <li class="field-skills__item">Transitions</li>
+        <li class="field-skills__item">Color Grading</li>
+        <li class="field-skills__item">Video Editing</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Motion Graphics Projects</h2>
+      <div class="motion-grid" id="projects-container"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="field-faq">
+    <div class="container">
+      <h2 class="section__title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-item__question">What types of motion graphics do you create?</div>
+        <div class="faq-item__answer">
+          I create a variety of motion graphics including animated logos, product launch videos, brand identity 
+          animations, social media content, and UI animations. Each project is tailored to the specific needs 
+          and brand identity of the client.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Do you work with video editing?</div>
+        <div class="faq-item__answer">
+          Yes, I use After Effects for both motion graphics and video editing. I can handle projects from 
+          concept to final export, including color grading and sound design integration.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__question">Can you create web animations?</div>
+        <div class="faq-item__answer">
+          While I primarily work in After Effects for video content, I also understand how to translate motion 
+          design principles to web animations using CSS and JavaScript, creating cohesive experiences across 
+          different media.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__container">
+      <p class="footer__name">Fatemeh Soraghi (Yasamin)</p>
+      <ul class="footer__links">
+        <li><a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+        <li><a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram</a></li>
+        <li><a href="mailto:fatemeh.s8424@gmail.com" class="footer__link">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initProjectsPage('motion', true);
+    });
+  </script>
+</body>
+</html>
+

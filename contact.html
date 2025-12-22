@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Yasamin Soraghi">
+  <title>Contact - Yasamin Soraghi</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header__container">
+      <a href="index.html" class="header__logo" aria-label="Home">Yasamin Soraghi</a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="work.html" class="nav__link">Work</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+          <li><a href="contact.html" class="nav__link active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact Page Header -->
+  <section class="work-page-header">
+    <div class="container">
+      <h1 class="section__title">Get In Touch</h1>
+      <p class="text-center" style="color: var(--text2); max-width: 600px; margin: 0 auto;">
+        Have a project in mind? Want to collaborate? Or just want to say hello? I'd love to hear from you!
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="section">
+    <div class="container">
+      <form class="contact-form" id="contact-form" aria-label="Contact form">
+        <div class="form-group">
+          <label for="name" class="form-label">Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            class="form-input" 
+            required
+            aria-required="true"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="form-input" 
+            required
+            aria-required="true"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="subject" class="form-label">Subject</label>
+          <input 
+            type="text" 
+            id="subject" 
+            name="subject" 
+            class="form-input" 
+            required
+            aria-required="true"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="message" class="form-label">Message</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            class="form-textarea" 
+            required
+            aria-required="true"
+          ></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="contact-info">
+        <h2 class="section__title" style="font-size: 2rem; margin-bottom: 2rem;">Or reach me directly</h2>
+        <ul class="contact-info__list">
+          <li class="contact-info__item">
+            <strong>Email:</strong> 
+            <a href="mailto:fatemeh.s8424@gmail.com" class="contact-info__link">fatemeh.s8424@gmail.com</a>
+          </li>
+          <li class="contact-info__item">
+            <strong>GitHub:</strong> 
+            <a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="contact-info__link">Yasamin-E84</a>
+          </li>
+          <li class="contact-info__item">
+            <strong>Telegram:</strong> 
+            <a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="contact-info__link">@yasamin_e84</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__container">
+      <p class="footer__name">Fatemeh Soraghi (Yasamin)</p>
+      <ul class="footer__links">
+        <li><a href="https://github.com/Yasamin-E84" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a></li>
+        <li><a href="https://t.me/yasamin_e84" target="_blank" rel="noopener noreferrer" class="footer__link">Telegram</a></li>
+        <li><a href="mailto:fatemeh.s8424@gmail.com" class="footer__link">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Handle contact form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const subject = formData.get('subject');
+      const message = formData.get('message');
+      
+      // Create mailto link (since this is a static site)
+      const mailtoLink = `mailto:fatemeh.s8424@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      alert('Your email client should open. If not, please send an email to fatemeh.s8424@gmail.com');
+    });
+  </script>
+</body>
+</html>
+
