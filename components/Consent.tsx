@@ -18,7 +18,7 @@ export function Consent({ locale }: { locale: Locale }) {
         setChoice(null);
         setOpen(true);
       }
-    }, 700);
+    }, 2000);
     function show() {
       setOpen(true);
     }

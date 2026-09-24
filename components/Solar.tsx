@@ -31,6 +31,7 @@ export function Solar({ locale }: { locale: Locale }) {
   );
   const [active, setActive] = useState(0),
     [ready, setReady] = useState(false),
+    [noteVisible, setNoteVisible] = useState(false),
     [fallback, setFallback] = useState(false),
     [manualPause, setManualPause] = useState(false),
     [hover, setHover] = useState(false),
@@ -48,6 +49,7 @@ export function Solar({ locale }: { locale: Locale }) {
   const placement = useRef({ x: 0, y: 0 });
   const dimensions = useRef({ width: 0, height: 0 });
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const noteTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // One animation clock drives spheres, hit targets, labels, and their connecting note.
   const onFrame = useCallback(({ points, width, height }: SolarFrame) => {
@@ -137,10 +139,11 @@ export function Solar({ locale }: { locale: Locale }) {
     observe.observe(note);
     observe.observe(stage);
     return () => observe.disconnect();
-  }, [fallback, onFrame]);
+  }, [fallback, noteVisible, onFrame]);
   useEffect(
     () => () => {
       if (hoverTimer.current) clearTimeout(hoverTimer.current);
+      if (noteTimer.current) clearTimeout(noteTimer.current);
     },
     [],
   );
@@ -152,11 +155,16 @@ export function Solar({ locale }: { locale: Locale }) {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
     hoverTimer.current = setTimeout(() => setHover(false), 240);
   }
-  const onReady = useCallback(() => setReady(true), []),
+  const revealScene = useCallback(() => {
+    setReady(true);
+    if (noteTimer.current) clearTimeout(noteTimer.current);
+    noteTimer.current = setTimeout(() => setNoteVisible(true), 2000);
+  }, []);
+  const onReady = revealScene,
     onFailure = useCallback(() => {
       setFallback(true);
-      setReady(true);
-    }, []);
+      revealScene();
+    }, [revealScene]);
   const paused = manualPause || hover || focus || reduced;
   useEffect(() => {
     if (!ready || paused) return;
@@ -188,14 +196,16 @@ export function Solar({ locale }: { locale: Locale }) {
             />
           ))}
         </svg>
-        <svg
-          className="planet-connector"
-          ref={connectorSvgRef}
-          aria-hidden="true"
-          preserveAspectRatio="none"
-        >
-          <path ref={connectorRef} />
-        </svg>
+        {noteVisible && (
+          <svg
+            className="planet-connector"
+            ref={connectorSvgRef}
+            aria-hidden="true"
+            preserveAspectRatio="none"
+          >
+            <path ref={connectorRef} />
+          </svg>
+        )}
         {!fallback && (
           <Canvas
             active={active}
@@ -269,21 +279,22 @@ export function Solar({ locale }: { locale: Locale }) {
             </button>
           ))}
         </div>
-        <div
-          ref={noteRef}
-          className="planet-info"
-          id="planet-card"
-          onPointerEnter={(e) => {
-            if (e.pointerType === "mouse") enterHover();
-          }}
-          onPointerLeave={(e) => {
-            if (e.pointerType === "mouse") leaveHover();
-          }}
-          onFocus={(e) => setFocus(e.target.matches(":focus-visible"))}
-          onBlur={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget)) setFocus(false);
-          }}
-        >
+        {noteVisible && (
+          <div
+            ref={noteRef}
+            className="planet-info"
+            id="planet-card"
+            onPointerEnter={(e) => {
+              if (e.pointerType === "mouse") enterHover();
+            }}
+            onPointerLeave={(e) => {
+              if (e.pointerType === "mouse") leaveHover();
+            }}
+            onFocus={(e) => setFocus(e.target.matches(":focus-visible"))}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setFocus(false);
+            }}
+          >
           <div className="planet-info-header">
             <span className="planet-index">
               0{active + 1} <span>/ 07</span>
@@ -323,7 +334,8 @@ export function Solar({ locale }: { locale: Locale }) {
               style={{ animationPlayState: paused ? "paused" : "running" }}
             />
           </div>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

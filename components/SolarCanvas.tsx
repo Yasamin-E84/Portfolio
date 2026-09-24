@@ -101,13 +101,6 @@ export default function SolarCanvas({
       visible = true,
       last = 0,
       completed = false;
-    const returned = (() => {
-      try {
-        return sessionStorage.getItem("ys-intro") === "1";
-      } catch {
-        return false;
-      }
-    })();
     function resize() {
       w = target.clientWidth;
       h = target.clientHeight;
@@ -134,8 +127,7 @@ export default function SolarCanvas({
         return;
       last = time;
       const points = planetLayout(w, h, time - start, reduced);
-      const progress =
-        reduced || returned ? 1 : Math.min(1, (time - start) / 1450);
+      const progress = reduced ? 1 : Math.min(1, (time - start) / 1450);
       const ease = progress * progress * (3 - 2 * progress);
       const solar = sunLayout(w, h);
       sun.position.set(
@@ -167,9 +159,6 @@ export default function SolarCanvas({
       renderer.render(scene, camera);
       if (progress === 1 && !completed) {
         completed = true;
-        try {
-          sessionStorage.setItem("ys-intro", "1");
-        } catch {}
         onReady();
       }
     }

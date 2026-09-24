@@ -1292,11 +1292,17 @@ button {
 }
 .honey {
   position: absolute;
-  left: -9999px;
   top: 0;
+  inset-inline-start: 0;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 .field-error,
 .form-error {
@@ -2873,7 +2879,7 @@ body:before {
 }
 @media (max-width: 760px) {
   .hero {
-    padding-top: 84px;
+    padding-top: 134px;
     padding-bottom: 61px;
   }
   .hero .solar-stage {
