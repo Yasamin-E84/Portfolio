@@ -1,14 +1,43 @@
 {
-  "name": "package.json",
+  "name": "yasamin-orbit-notebook",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "build:worker": "opennextjs-cloudflare build",
+    "start": "next start --port 3000",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "latest",
+    "drizzle-orm": "latest",
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "three": "latest",
+    "zod": "latest"
   },
   "devDependencies": {
-    "vite": "^7.2.4"
+    "@cloudflare/workers-types": "latest",
+    "@playwright/test": "latest",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/three": "latest",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "drizzle-kit": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "16.3.6",
+    "prettier": "^3.9.9",
+    "sharp": "latest",
+    "tailwindcss": "4.3.3",
+    "tsx": "latest",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "wrangler": "latest"
   }
 }

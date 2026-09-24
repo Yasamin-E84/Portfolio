@@ -1,0 +1,59 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  role="img"
+  aria-label="Sun"
+>
+  <defs>
+    <radialGradient id="sunBody" cx="38%" cy="34%" r="68%">
+      <stop offset="0%" stop-color="#FFF9B8"/>
+      <stop offset="24%" stop-color="#FFE66A"/>
+      <stop offset="58%" stop-color="#FFC928"/>
+      <stop offset="82%" stop-color="#FFAA12"/>
+      <stop offset="100%" stop-color="#F58A08"/>
+    </radialGradient>
+
+    <radialGradient id="sunHighlight" cx="35%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.72"/>
+      <stop offset="42%" stop-color="#FFF7C2" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sunEdge" x1="18%" y1="12%" x2="82%" y2="88%">
+      <stop offset="0%" stop-color="#FFF3A2" stop-opacity="0.95"/>
+      <stop offset="48%" stop-color="#FFC52A" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#D96C00" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+
+  <circle
+    cx="50"
+    cy="50"
+    r="49"
+    fill="url(#sunBody)"
+  />
+
+  <circle
+    cx="50"
+    cy="50"
+    r="48.25"
+    fill="none"
+    stroke="url(#sunEdge)"
+    stroke-width="1.5"
+  />
+
+  <circle
+    cx="43"
+    cy="40"
+    r="34"
+    fill="url(#sunHighlight)"
+  />
+
+  <g fill="#FFF1A0" opacity="0.22">
+    <circle cx="31" cy="54" r="3.1"/>
+    <circle cx="64" cy="34" r="2.4"/>
+    <circle cx="67" cy="63" r="3.8"/>
+    <circle cx="45" cy="70" r="2.2"/>
+    <circle cx="53" cy="48" r="1.8"/>
+  </g>
+</svg>
