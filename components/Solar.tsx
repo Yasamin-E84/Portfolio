@@ -9,7 +9,7 @@ import {
   useSyncExternalStore,
   type CSSProperties,
 } from "react";
-import { planets, copy, type Locale } from "@/lib/content";
+import { planets, copy, publicPath, type Locale } from "@/lib/content";
 import {
   planetLayout,
   orbitPath,
@@ -309,7 +309,7 @@ export function Solar({ locale }: { locale: Locale }) {
             </div>
             <a
               className="text-link"
-              href={`/${locale}/works?category=${planet.id}`}
+              href={publicPath(`/${locale}/works?category=${planet.id}`)}
             >
               {c.viewWork} <span aria-hidden="true">↗</span>
             </a>

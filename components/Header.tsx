@@ -2,10 +2,66 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSyncExternalStore } from "react";
-import { copy, type Locale } from "@/lib/content";
+import { copy, publicPath, type Locale } from "@/lib/content";
 function subscribe(cb: () => void) {
   window.addEventListener("ys-theme", cb);
   return () => window.removeEventListener("ys-theme", cb);
+}
+export function ThemeSwitch({
+  locale,
+  large = false,
+}: {
+  locale: Locale;
+  large?: boolean;
+}) {
+  const theme = useSyncExternalStore(
+    subscribe,
+    () => document.documentElement.dataset.theme || "light",
+    () => "light",
+  );
+  function toggle() {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    try {
+      localStorage.setItem("ys-theme", nextTheme);
+    } catch {}
+    window.dispatchEvent(new Event("ys-theme"));
+  }
+  return (
+    <button
+      className={`theme-switch${large ? " theme-switch-large" : ""}`}
+      type="button"
+      role="switch"
+      aria-checked={theme === "dark"}
+      onClick={toggle}
+      aria-label={
+        locale === "en" ? "Toggle light and dark theme" : "تغییر تم روشن و تیره"
+      }
+    >
+      <img
+        className="theme-day"
+        src={publicPath("/media/theme/lightYasi.svg")}
+        alt=""
+      />
+      <img
+        className="theme-night"
+        src={publicPath("/media/theme/darkYasi.svg")}
+        alt=""
+      />
+      <span className="theme-thumb">
+        <img
+          className="sun-icon"
+          src={publicPath("/media/theme/sunHandle.svg")}
+          alt=""
+        />
+        <img
+          className="moon-icon"
+          src={publicPath("/media/theme/moonHandle.svg")}
+          alt=""
+        />
+      </span>
+    </button>
+  );
 }
 export function Header({
   locale,
@@ -16,19 +72,6 @@ export function Header({
 }) {
   const c = copy[locale],
     pathname = usePathname();
-  const theme = useSyncExternalStore(
-    subscribe,
-    () => document.documentElement.dataset.theme || "light",
-    () => "light",
-  );
-  function toggle() {
-    const t = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = t;
-    try {
-      localStorage.setItem("ys-theme", t);
-    } catch {}
-    window.dispatchEvent(new Event("ys-theme"));
-  }
   const other = locale === "en" ? "fa" : "en";
   function remember() {
     document.cookie = `ys-locale=${other};path=/;max-age=31536000;SameSite=Lax`;
@@ -43,7 +86,12 @@ export function Header({
       </a>
       <header className={`site-header${cosmic ? " cosmic-header" : ""}`}>
         <Link className="identity" href={`/${locale}`} aria-label={c.name}>
-          <img src="/media/ys-logo.png" width="46" height="46" alt="YS" />
+          <img
+            src={publicPath("/media/ys-logo.png")}
+            width="46"
+            height="46"
+            alt="YS"
+          />
           <span>
             Yasamin<span className="identity-surname"> Soraghi</span>
             <small>
@@ -72,11 +120,11 @@ export function Header({
         <div className="header-tools">
           <a
             className="locale-switch"
-            href={
+            href={publicPath(
               /^\/(en|fa)(\/|$)/.test(pathname)
                 ? pathname.replace(/^\/(en|fa)/, `/${other}`)
-                : `/${other}`
-            }
+                : `/${other}`,
+            )}
             onClick={(event) => {
               remember();
               event.currentTarget.search = window.location.search;
@@ -87,37 +135,7 @@ export function Header({
             {other === "fa" ? "فا" : "EN"}
             <span aria-hidden="true"> ↗</span>
           </a>
-          <button
-            className="theme-switch"
-            type="button"
-            role="switch"
-            aria-checked={theme === "dark"}
-            onClick={toggle}
-            aria-label={locale === "en" ? "Dark theme" : "تم تیره"}
-          >
-            <img
-              className="theme-day"
-              src="/media/theme/lightYasi.svg"
-              alt=""
-            />
-            <img
-              className="theme-night"
-              src="/media/theme/darkYasi.svg"
-              alt=""
-            />
-            <span className="theme-thumb">
-              <img
-                className="sun-icon"
-                src="/media/theme/sunHandle.svg"
-                alt=""
-              />
-              <img
-                className="moon-icon"
-                src="/media/theme/moonHandle.svg"
-                alt=""
-              />
-            </span>
-          </button>
+          <ThemeSwitch locale={locale} />
         </div>
       </header>
     </>

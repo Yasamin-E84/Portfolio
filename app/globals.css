@@ -54,8 +54,27 @@ body {
   background-size: 750px;
   background-blend-mode: multiply;
 }
-html[lang="fa"] body {
+.locale-root[data-locale="fa"] {
   font-family: Vazirmatn, Arial, sans-serif;
+}
+.locale-root {
+  min-height: 100vh;
+}
+.root-redirect {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 18px;
+  text-align: center;
+}
+.root-redirect > div {
+  display: flex;
+  gap: 22px;
+}
+.root-redirect a {
+  text-decoration: underline;
+  text-underline-offset: 6px;
 }
 a {
   color: inherit;
@@ -115,10 +134,10 @@ h2,
   letter-spacing: -0.045em;
   line-height: 1.1;
 }
-html[lang="fa"] h1,
-html[lang="fa"] h2,
-html[lang="fa"] h3,
-html[lang="fa"] .hand-note {
+[data-locale="fa"] h1,
+[data-locale="fa"] h2,
+[data-locale="fa"] h3,
+[data-locale="fa"] .hand-note {
   font-family: Vazirmatn, Arial, sans-serif;
   letter-spacing: -0.035em;
 }
@@ -264,6 +283,14 @@ button {
 }
 [data-theme="dark"] .sun-icon {
   opacity: 0;
+}
+.theme-switch-large {
+  width: min(290px, 70vw);
+  height: min(119px, 29vw);
+  border-width: 2px;
+  box-shadow:
+    inset 0 0 8px #0006,
+    var(--shadow);
 }
 .hero {
   max-width: 1600px;
@@ -799,6 +826,37 @@ button {
   font-size: 14px;
   margin: 7px 0 15px;
 }
+.theme-study {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 55px;
+  margin-top: 55px;
+  padding: 38px clamp(25px, 5vw, 60px);
+  border: 1px solid var(--line);
+  background: var(--sheet) url("/media/paper-fibers.webp");
+  background-blend-mode: multiply;
+  background-size: 750px;
+  box-shadow: var(--shadow);
+  transform: rotate(0.35deg);
+}
+.theme-study h3 {
+  font:
+    400 clamp(1.8rem, 3vw, 2.7rem) Georgia,
+    serif;
+  margin: 10px 0 14px;
+}
+.theme-study > div > p:last-child {
+  max-width: 660px;
+}
+.theme-study-control {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+.theme-study-control .hand-note {
+  transform: rotate(-4deg);
+}
 .visual-section {
   margin-top: 130px;
 }
@@ -898,6 +956,12 @@ button {
 }
 .art-strip .art-sheet:nth-child(2) {
   transform: rotate(1.5deg);
+}
+.art-strip-more {
+  grid-template-columns: repeat(4, 1fr);
+}
+.art-strip-more .art-preview img {
+  height: 250px;
 }
 .art-dialog {
   border: 0;
@@ -1975,50 +2039,50 @@ button {
     max-width: 150px;
   }
 }
-html[lang="fa"] .eyebrow {
+[data-locale="fa"] .eyebrow {
   letter-spacing: 0;
   font-size: 12px;
 }
-html[lang="fa"] h1 {
+[data-locale="fa"] h1 {
   line-height: 1.45;
   font-size: clamp(2.4rem, 4.3vw, 4.8rem);
 }
-html[lang="fa"] h2 {
+[data-locale="fa"] h2 {
   line-height: 1.55;
 }
-html[lang="fa"] .hero-copy {
+[data-locale="fa"] .hero-copy {
   max-width: 670px;
 }
-html[lang="fa"] .hero-intro {
+[data-locale="fa"] .hero-intro {
   line-height: 2;
 }
-html[lang="fa"] .planet-info {
+[data-locale="fa"] .planet-info {
   direction: rtl;
 }
-html[lang="fa"] .planet-info h2 {
+[data-locale="fa"] .planet-info h2 {
   font-family: Vazirmatn;
   font-size: 23px;
 }
-html[lang="fa"] .planet-info-body > p {
+[data-locale="fa"] .planet-info-body > p {
   line-height: 2;
 }
-html[lang="fa"] .planet-label {
+[data-locale="fa"] .planet-label {
   font-family: Vazirmatn;
 }
-html[lang="fa"] .project-notes h3 {
+[data-locale="fa"] .project-notes h3 {
   font-family: Georgia, serif;
 }
-html[lang="fa"] .project-counter {
+[data-locale="fa"] .project-counter {
   direction: ltr;
   display: block;
 }
-html[lang="fa"] .hero-margin-note {
+[data-locale="fa"] .hero-margin-note {
   direction: ltr;
 }
-html[lang="fa"] .contact-email {
+[data-locale="fa"] .contact-email {
   justify-content: flex-end;
 }
-html[lang="fa"] .cookie-note h2 {
+[data-locale="fa"] .cookie-note h2 {
   font-family: Vazirmatn;
   font-size: 17px;
 }
@@ -2457,39 +2521,39 @@ body:before {
 .site-footer {
   border-top: 3px double var(--line);
 }
-html[lang="fa"] .hero h1 em,
-html[lang="fa"] .hand-note,
-html[lang="fa"] .planet-info h2,
-html[lang="fa"] .planet-label,
-html[lang="fa"] .field label,
-html[lang="fa"] .cookie-note h2,
-html[lang="fa"] .art-sheet figcaption strong,
-html[lang="fa"] .video-sheet figcaption strong,
-html[lang="fa"] .paper-transition i,
-html[lang="fa"] .footer-signature {
+[data-locale="fa"] .hero h1 em,
+[data-locale="fa"] .hand-note,
+[data-locale="fa"] .planet-info h2,
+[data-locale="fa"] .planet-label,
+[data-locale="fa"] .field label,
+[data-locale="fa"] .cookie-note h2,
+[data-locale="fa"] .art-sheet figcaption strong,
+[data-locale="fa"] .video-sheet figcaption strong,
+[data-locale="fa"] .paper-transition i,
+[data-locale="fa"] .footer-signature {
   font-family: Vazirmatn, serif;
 }
-html[lang="fa"] .button,
-html[lang="fa"] .text-link,
-html[lang="fa"] .site-header nav,
-html[lang="fa"] .footer-links,
-html[lang="fa"] .eyebrow {
+[data-locale="fa"] .button,
+[data-locale="fa"] .text-link,
+[data-locale="fa"] .site-header nav,
+[data-locale="fa"] .footer-links,
+[data-locale="fa"] .eyebrow {
   font-family: Vazirmatn, sans-serif;
 }
-html[lang="fa"] .hero h1 em {
+[data-locale="fa"] .hero h1 em {
   font-size: 1em;
 }
-html[lang="fa"] .planet-label {
+[data-locale="fa"] .planet-label {
   font-size: 14px;
 }
-html[lang="fa"] .field label {
+[data-locale="fa"] .field label {
   font-size: 15px;
 }
-html[lang="fa"] .art-sheet figcaption strong,
-html[lang="fa"] .video-sheet figcaption strong {
+[data-locale="fa"] .art-sheet figcaption strong,
+[data-locale="fa"] .video-sheet figcaption strong {
   font-size: 14px;
 }
-html[lang="fa"] .hand-note {
+[data-locale="fa"] .hand-note {
   font-size: 22px;
   line-height: 1.8;
 }
@@ -2520,7 +2584,7 @@ html[lang="fa"] .hand-note {
   .planet-label {
     font-size: 15px;
   }
-  html[lang="fa"] .planet-label {
+  [data-locale="fa"] .planet-label {
     font-size: 11px;
   }
   .planet-info h2 {
@@ -2532,7 +2596,7 @@ html[lang="fa"] .hand-note {
   .solar-caption .hand-note {
     font-size: 25px;
   }
-  html[lang="fa"] .solar-caption .hand-note {
+  [data-locale="fa"] .solar-caption .hand-note {
     font-size: 18px;
   }
   .project-notes h3,
@@ -2547,14 +2611,14 @@ html[lang="fa"] .hand-note {
   .video-sheet figcaption strong {
     font-size: 19px;
   }
-  html[lang="fa"] .art-sheet figcaption strong,
-  html[lang="fa"] .video-sheet figcaption strong {
+  [data-locale="fa"] .art-sheet figcaption strong,
+  [data-locale="fa"] .video-sheet figcaption strong {
     font-size: 12px;
   }
   .paper-transition i {
     font-size: 20px;
   }
-  html[lang="fa"] .paper-transition i {
+  [data-locale="fa"] .paper-transition i {
     font-size: 14px;
   }
 }
@@ -2759,7 +2823,7 @@ html[lang="fa"] .hand-note {
 .cosmic-explore span {
   margin-inline-start: 18px;
 }
-html[lang="fa"] .cosmic-explore {
+[data-locale="fa"] .cosmic-explore {
   font-family: Vazirmatn, serif;
   font-size: 14px;
 }
@@ -2803,7 +2867,7 @@ html[lang="fa"] .cosmic-explore {
   font-style: normal;
   color: var(--accent);
 }
-html[lang="fa"] .notebook-introduction h2 em {
+[data-locale="fa"] .notebook-introduction h2 em {
   font-family: Vazirmatn, serif;
   font-size: 1em;
 }
@@ -2916,7 +2980,7 @@ html[lang="fa"] .notebook-introduction h2 em {
   font-family: "Courier New", monospace;
   margin-top: 25px !important;
 }
-html[lang="fa"] .page-heading .filter-summary {
+[data-locale="fa"] .page-heading .filter-summary {
   font-family: Vazirmatn, sans-serif;
 }
 .works-page .visual-section,
@@ -2924,6 +2988,11 @@ html[lang="fa"] .page-heading .filter-summary {
 .works-page .implementation-study,
 .works-page .editing-work {
   margin-top: 65px;
+}
+.implementation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
 }
 .works-page > section:first-of-type {
   margin-top: 10px;
@@ -2958,7 +3027,7 @@ html[lang="fa"] .page-heading .filter-summary {
     cursive;
   margin: 0 0 18px;
 }
-html[lang="fa"] .directory-note h3 {
+[data-locale="fa"] .directory-note h3 {
   font:
     24px Vazirmatn,
     serif;
@@ -3011,9 +3080,17 @@ html[lang="fa"] .directory-note h3 {
     padding: 7px 10px;
   }
   .notebook-directory,
-  .instagram-studies {
+  .instagram-studies,
+  .implementation-grid,
+  .theme-study {
     grid-template-columns: 1fr;
     gap: 25px;
+  }
+  .theme-study-control {
+    justify-self: center;
+  }
+  .art-strip-more {
+    grid-template-columns: 1fr 1fr;
   }
   .directory-note {
     padding: 23px;

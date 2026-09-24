@@ -1,5 +1,6 @@
-import { copy, pick, type Locale } from "@/lib/content";
+import { copy, pick, publicPath, type Locale } from "@/lib/content";
 import { Artwork, Video } from "./Media";
+import { ThemeSwitch } from "./Header";
 const projects = [
   {
     name: "ReactKala",
@@ -71,7 +72,7 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
             >
               <span className="paper-tape" />
               <img
-                src={`/media/projects/${p.image}.webp`}
+                src={publicPath(`/media/projects/${p.image}.webp`)}
                 alt={`${p.name} — ${pick(locale, "interface preview", "پیش‌نمایش رابط کاربری")}`}
                 width="1200"
                 height="833"
@@ -129,8 +130,8 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
           <p>
             {pick(
               locale,
-              "A separate full-stack digital-menu project built with Next.js and a database. Its server is currently unavailable; the source is available on the Foryxo account.",
-              "پروژه مستقل منوی دیجیتال فول‌استک با Next.js و پایگاه داده. سرور آن در حال حاضر در دسترس نیست؛ کد پروژه در حساب Foryxo موجود است.",
+              "A separate full-stack digital-menu project built with Next.js and a database. Explore its public interface on GitHub Pages and its source on the Foryxo account.",
+              "پروژه مستقل منوی دیجیتال فول‌استک با Next.js و پایگاه داده. رابط عمومی آن در GitHub Pages و کد پروژه در حساب Foryxo در دسترس است.",
             )}
           </p>
           <a
@@ -141,6 +142,31 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
           >
             {c.source} ↗
           </a>
+        </div>
+      </aside>
+      <aside className="theme-study" aria-labelledby="theme-study-title">
+        <div>
+          <p className="eyebrow">INTERACTION STUDY / UI DETAIL</p>
+          <h3 id="theme-study-title">
+            {pick(
+              locale,
+              "Day and night, drawn into one control.",
+              "روز و شب، در یک کنترل طراحی‌شده.",
+            )}
+          </h3>
+          <p>
+            {pick(
+              locale,
+              "A larger working edition of this portfolio’s own theme switch. It uses the exact same artwork, motion and saved preference as the control in the header.",
+              "نسخه بزرگ و فعالِ کلید تغییر تم همین پورتفولیو؛ با همان تصویرسازی، حرکت و ذخیره انتخابی که در سربرگ استفاده شده است.",
+            )}
+          </p>
+        </div>
+        <div className="theme-study-control">
+          <span className="hand-note">
+            {pick(locale, "try the switch", "کلید را امتحان کنید")}
+          </span>
+          <ThemeSwitch locale={locale} large />
         </div>
       </aside>
     </section>
@@ -236,6 +262,78 @@ export function VisualWork({ locale }: { locale: Locale }) {
           locale={locale}
         />
       </div>
+      <div className="art-strip art-strip-more">
+        <Artwork
+          file="photoshop-rwby-war"
+          title={pick(locale, "Move forward", "حرکت رو به جلو")}
+          note={pick(
+            locale,
+            "Photoshop · cinematic poster",
+            "فتوشاپ · پوستر سینمایی",
+          )}
+          locale={locale}
+        />
+        <Artwork
+          file="photoshop-retouch"
+          title={pick(locale, "Portrait retouch", "رتوش پرتره")}
+          note={pick(
+            locale,
+            "Photoshop · beauty retouch",
+            "فتوشاپ · رتوش چهره",
+          )}
+          locale={locale}
+        />
+        <Artwork
+          file="photoshop-dance"
+          title={pick(locale, "Just feel mighty", "پوستر حرکت")}
+          note={pick(
+            locale,
+            "Photoshop · campaign banner",
+            "فتوشاپ · بنر تبلیغاتی",
+          )}
+          locale={locale}
+        />
+        <Artwork
+          file="illustrator-blend"
+          title={pick(locale, "World Graphics Day", "روز جهانی گرافیک")}
+          note={pick(
+            locale,
+            "Illustrator · Persian poster",
+            "ایلاستریتور · پوستر فارسی",
+          )}
+          locale={locale}
+        />
+        <Artwork
+          file="illustrator-knife"
+          title={pick(locale, "Ink and edge", "جوهر و لبه")}
+          note={pick(
+            locale,
+            "Illustrator · emblem study",
+            "ایلاستریتور · تمرین نشان",
+          )}
+          locale={locale}
+        />
+        <Artwork
+          file="illustrator-rocket"
+          title={pick(locale, "Launch study", "تمرین پرتاب")}
+          note={pick(
+            locale,
+            "Illustrator · ink illustration",
+            "ایلاستریتور · تصویرسازی جوهری",
+          )}
+          locale={locale}
+        />
+        <Artwork
+          file="logo-glam-touch"
+          title="Glam Touch"
+          note={pick(
+            locale,
+            "Illustrator · logo and sign mockup",
+            "ایلاستریتور · لوگو و ماکاپ تابلو",
+          )}
+          locale={locale}
+        />
+      </div>
     </section>
   );
 }
@@ -259,6 +357,59 @@ export function MotionWork({ locale }: { locale: Locale }) {
               "افتر افکتس · ۸ ثانیه · تمرین موشن",
             )}
             locale={locale}
+          />
+          <Video
+            file="digikala"
+            title="Digikala"
+            note={pick(
+              locale,
+              "After Effects · promotional motion",
+              "افتر افکتس · موشن تبلیغاتی",
+            )}
+            locale={locale}
+          />
+          <Video
+            file="bank-mellat"
+            title={pick(locale, "Bank Mellat", "بانک ملت")}
+            note={pick(
+              locale,
+              "After Effects · logo motion",
+              "افتر افکتس · لوگوموشن",
+            )}
+            locale={locale}
+            portrait
+          />
+          <Video
+            file="pepsi"
+            title="Pepsi"
+            note={pick(
+              locale,
+              "After Effects · brand animation",
+              "افتر افکتس · انیمیشن برند",
+            )}
+            locale={locale}
+            portrait
+          />
+          <Video
+            file="sam-freeze"
+            title="Sam Freeze"
+            note={pick(
+              locale,
+              "After Effects · freeze-frame study",
+              "افتر افکتس · تمرین فریز فریم",
+            )}
+            locale={locale}
+          />
+          <Video
+            file="walkman"
+            title="Walkman"
+            note={pick(
+              locale,
+              "After Effects · product animation",
+              "افتر افکتس · انیمیشن محصول",
+            )}
+            locale={locale}
+            portrait
           />
           <Video
             file="snapp-food"

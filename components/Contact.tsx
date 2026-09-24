@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { copy, type Locale } from "@/lib/content";
 export function Contact({ locale }: { locale: Locale }) {
   const c = copy[locale],
@@ -16,6 +17,17 @@ export function Contact({ locale }: { locale: Locale }) {
     setBusy(true);
     setError("");
     setFields({});
+    if (process.env.NEXT_PUBLIC_STATIC_SITE === "1") {
+      const subject = encodeURIComponent(
+        `Portfolio message from ${String(data.get("name") || "")}`,
+      );
+      const body = encodeURIComponent(
+        `${String(data.get("message") || "")}\n\nFrom: ${String(data.get("email") || "")}`,
+      );
+      window.location.href = `mailto:foryxolabels@gmail.com?subject=${subject}&body=${body}`;
+      setBusy(false);
+      return;
+    }
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -113,7 +125,12 @@ export function Contact({ locale }: { locale: Locale }) {
       )}
       <div className="form-bottom">
         <p>
-          {c.formNote} <a href={`/${locale}/privacy`}>{c.privacy}</a>
+          {process.env.NEXT_PUBLIC_STATIC_SITE === "1"
+            ? locale === "en"
+              ? "This public preview opens your email app so the message can be sent directly. "
+              : "این نسخه عمومی، برنامه ایمیل شما را برای ارسال مستقیم پیام باز می‌کند. "
+            : c.formNote}{" "}
+          <Link href={`/${locale}/privacy`}>{c.privacy}</Link>
         </p>
         <button className="button button-dark" disabled={busy} type="submit">
           {busy ? c.sending : c.send}

@@ -9,7 +9,7 @@ export async function generateMetadata({
     title: locale === "fa" ? "صفحه خارج از مدار" : "Page outside the orbit",
     description:
       locale === "fa"
-        ? "این صفحه پیدا نشد. پروژه‌های یاسمن سراقی را ببینید یا با او تماس بگیرید."
+        ? "این صفحه پیدا نشد. پروژه‌های یاسمین سراقی را ببینید یا با او تماس بگیرید."
         : "This page could not be found. Explore Yasamin Soraghi’s projects or get in touch.",
   };
 }

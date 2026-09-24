@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, copy } from "@/lib/content";
 import { Header } from "@/components/Header";
@@ -12,7 +13,7 @@ export async function generateMetadata({
     title: locale === "fa" ? "سپاس از پیام شما" : "Thank you",
     description:
       locale === "fa"
-        ? "پیام تماس شما برای یاسمن سراقی ذخیره شد."
+        ? "پیام تماس شما برای یاسمین سراقی ذخیره شد."
         : "Your contact message has been saved for Yasamin Soraghi.",
     robots: { index: false, follow: true },
   };
@@ -36,9 +37,9 @@ export default async function Thanks({
         <h1>{c.thankTitle}</h1>
         <p>{c.thankText}</p>
         <div className="hero-actions">
-          <a className="button button-dark" href={`/${locale}`}>
+          <Link className="button button-dark" href={`/${locale}`}>
             {c.back} ↗
-          </a>
+          </Link>
           <a className="text-link" href="mailto:foryxolabels@gmail.com">
             Email ↗
           </a>

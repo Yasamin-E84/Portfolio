@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, pick } from "@/lib/content";
 import { Header } from "@/components/Header";
@@ -16,7 +17,7 @@ export async function generateMetadata({
     description: pick(
       locale,
       "Meet Yasamin Soraghi, a frontend-focused developer and visual creator in Tehran. Background, education, creative practice and CV.",
-      "با یاسمن سراقی، توسعه‌دهنده فرانت‌اند و خالق آثار بصری در تهران آشنا شوید؛ مسیر یادگیری، تحصیلات، فعالیت خلاقانه و رزومه.",
+      "با یاسمین سراقی، توسعه‌دهنده فرانت‌اند و خالق آثار بصری در تهران آشنا شوید؛ مسیر یادگیری، تحصیلات، فعالیت خلاقانه و رزومه.",
     ),
     alternates: {
       canonical: `/${locale}/about`,
@@ -50,12 +51,12 @@ export default async function AboutPage({
         </header>
         <AboutContent locale={locale} />
         <div className="page-end-links section-shell">
-          <a className="button button-outline" href={`/${locale}/works`}>
+          <Link className="button button-outline" href={`/${locale}/works`}>
             {pick(locale, "Explore my work", "دیدن نمونه‌کارها")} ↗
-          </a>
-          <a className="text-link" href={`/${locale}#contact`}>
+          </Link>
+          <Link className="text-link" href={`/${locale}#contact`}>
             {pick(locale, "Get in touch", "گفت‌وگو کنیم")} ↗
-          </a>
+          </Link>
         </div>
       </main>
       <Footer locale={locale} />

@@ -6,6 +6,7 @@ node_modules/
 dist/
 tmp/
 output/
+out/
 test-results/
 playwright-report/
 .env*

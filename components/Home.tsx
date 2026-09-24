@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { copy, pick, type Locale } from "@/lib/content";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -37,13 +38,13 @@ export function Home({ locale }: { locale: Locale }) {
               </h2>
               <p className="hero-intro">{c.intro}</p>
               <div className="hero-actions">
-                <a className="button button-dark" href={`/${locale}/works`}>
+                <Link className="button button-dark" href={`/${locale}/works`}>
                   {c.explore}
                   <span aria-hidden="true">↘</span>
-                </a>
-                <a className="text-link" href={`/${locale}/about`}>
+                </Link>
+                <Link className="text-link" href={`/${locale}/about`}>
                   {c.nav[2]} ↗
-                </a>
+                </Link>
               </div>
             </div>
             <div className="hero-margin-note" aria-hidden="true">
@@ -57,7 +58,7 @@ export function Home({ locale }: { locale: Locale }) {
           </div>
         </section>
         <div className="notebook-directory section-shell">
-          <a className="directory-note" href={`/${locale}/works`}>
+          <Link className="directory-note" href={`/${locale}/works`}>
             <span className="hand-note">01</span>
             <h2>{pick(locale, "The work notebook", "دفتر نمونه‌کارها")}</h2>
             <p>
@@ -68,8 +69,8 @@ export function Home({ locale }: { locale: Locale }) {
               )}
             </p>
             <span aria-hidden="true">↗</span>
-          </a>
-          <a className="directory-note" href={`/${locale}/about`}>
+          </Link>
+          <Link className="directory-note" href={`/${locale}/about`}>
             <span className="hand-note">02</span>
             <h2>{c.nav[2]}</h2>
             <p>
@@ -80,7 +81,7 @@ export function Home({ locale }: { locale: Locale }) {
               )}
             </p>
             <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
         </div>
         <ContactSection locale={locale} />
       </main>

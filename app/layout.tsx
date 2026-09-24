@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { headers } from "next/headers";
-import { siteUrl } from "@/lib/content";
+import { publicPath, siteUrl } from "@/lib/content";
 import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -10,7 +9,10 @@ export const metadata: Metadata = {
   },
   description:
     "Frontend-focused full-stack developer and visual creator in Tehran. Explore React projects, illustration, motion and video.",
-  icons: { icon: "/media/ys-icon.png", apple: "/media/ys-icon.png" },
+  icons: {
+    icon: publicPath("/media/ys-icon.png"),
+    apple: publicPath("/media/ys-icon.png"),
+  },
   openGraph: {
     type: "website",
     siteName: "Yasamin Soraghi",
@@ -34,19 +36,13 @@ export const viewport: Viewport = {
   ],
 };
 const initialize = `(function(){try{var t=localStorage.getItem('ys-theme');document.documentElement.dataset.theme=t||((matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light')}catch(e){}})()`;
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const h = await headers();
-  const locale = h.get("x-portfolio-locale") === "fa" ? "fa" : "en";
   return (
-    <html
-      lang={locale}
-      dir={locale === "fa" ? "rtl" : "ltr"}
-      suppressHydrationWarning
-    >
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: initialize }} />
       </head>

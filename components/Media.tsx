@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { copy, type Locale } from "@/lib/content";
+import { copy, publicPath, type Locale } from "@/lib/content";
 export function Video({
   file,
   title,
@@ -25,8 +25,8 @@ export function Video({
             autoPlay
             playsInline
             preload="metadata"
-            src={`/media/video/${file}.mp4`}
-            poster={`/media/video/${file}.webp`}
+            src={publicPath(`/media/video/${file}.mp4`)}
+            poster={publicPath(`/media/video/${file}.webp`)}
             aria-label={title}
           ></video>
         ) : (
@@ -36,7 +36,7 @@ export function Video({
             aria-label={`${c.play}: ${title}`}
           >
             <img
-              src={`/media/video/${file}.webp`}
+              src={publicPath(`/media/video/${file}.webp`)}
               alt={title}
               width={portrait ? 405 : 720}
               height={portrait ? 720 : 405}
@@ -79,7 +79,7 @@ export function Artwork({
         aria-label={`${c.imageOpen}: ${title}`}
       >
         <img
-          src={`/media/${file}.webp`}
+          src={publicPath(`/media/${file}.webp`)}
           alt={title}
           loading="lazy"
           width="700"
@@ -106,7 +106,7 @@ export function Artwork({
         >
           ×
         </button>
-        <img src={`/media/${file}.webp`} alt={title} />
+        <img src={publicPath(`/media/${file}.webp`)} alt={title} />
         <p>{title}</p>
       </dialog>
     </figure>

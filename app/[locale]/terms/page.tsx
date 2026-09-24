@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, copy, pick } from "@/lib/content";
 import { Header } from "@/components/Header";
@@ -12,7 +13,7 @@ export async function generateMetadata({
     title: locale === "fa" ? "شرایط استفاده" : "Terms of use",
     description:
       locale === "fa"
-        ? "شرایط استفاده از پورتفولیو، آثار بصری، نمونه‌های آموزشی و فرم تماس یاسمن سراقی."
+        ? "شرایط استفاده از پورتفولیو، آثار بصری، نمونه‌های آموزشی و فرم تماس یاسمین سراقی."
         : "Use of Yasamin Soraghi’s portfolio, creative work, educational samples and contact form.",
     alternates: {
       canonical: `/${locale}/terms`,
@@ -55,7 +56,7 @@ export default async function Terms({
       : [
           [
             "درباره سایت",
-            "این پورتفولیوی شخصی، پروژه‌های توسعه، تمرین‌های آموزشی و آثار بصری یاسمن سراقی را معرفی می‌کند. وضعیت درج‌شده، محدوده هر نمونه را روشن می‌کند؛ نمونه‌های اولیه و بازسازی‌های آموزشی به‌عنوان سرویس تجاری آماده ارائه نمی‌شوند.",
+            "این پورتفولیوی شخصی، پروژه‌های توسعه، تمرین‌های آموزشی و آثار بصری یاسمین سراقی را معرفی می‌کند. وضعیت درج‌شده، محدوده هر نمونه را روشن می‌کند؛ نمونه‌های اولیه و بازسازی‌های آموزشی به‌عنوان سرویس تجاری آماده ارائه نمی‌شوند.",
           ],
           [
             "آثار و محتوای متعلق به دیگران",
@@ -78,9 +79,9 @@ export default async function Terms({
     <>
       <Header locale={locale} />
       <main id="main" className="legal-main">
-        <a className="text-link" href={`/${locale}`}>
+        <Link className="text-link" href={`/${locale}`}>
           ← {c.back}
-        </a>
+        </Link>
         <h1>{c.terms}</h1>
         <p className="legal-date">
           {pick(locale, "Updated 23 September 2026", "به‌روزرسانی: ۱ مهر ۱۴۰۵")}

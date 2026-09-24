@@ -1,4 +1,4 @@
-import { copy, pick, type Locale } from "@/lib/content";
+import { copy, pick, publicPath, type Locale } from "@/lib/content";
 export function AboutContent({ locale }: { locale: Locale }) {
   const c = copy[locale];
   return (
@@ -6,7 +6,7 @@ export function AboutContent({ locale }: { locale: Locale }) {
       <div className="portrait-sheet">
         <span className="paper-tape" />
         <img
-          src="/media/yasamin-portrait.webp"
+          src={publicPath("/media/yasamin-portrait.webp")}
           alt={c.name}
           width="700"
           height="933"
@@ -26,7 +26,7 @@ export function AboutContent({ locale }: { locale: Locale }) {
         <p>{c.aboutText2}</p>
         <a
           className="button button-outline"
-          href="/cv/yasamin-soraghi.pdf"
+          href={publicPath("/cv/yasamin-soraghi.pdf")}
           target="_blank"
           rel="noreferrer"
         >

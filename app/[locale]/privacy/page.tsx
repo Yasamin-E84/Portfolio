@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, copy, pick } from "@/lib/content";
 import { Header } from "@/components/Header";
@@ -12,7 +13,7 @@ export async function generateMetadata({
     title: locale === "fa" ? "حریم خصوصی" : "Privacy",
     description:
       locale === "fa"
-        ? "نحوه استفاده از پیام‌های تماس، ترجیحات مرورگر و آمار بازدید در وب‌سایت یاسمن سراقی."
+        ? "نحوه استفاده از پیام‌های تماس، ترجیحات مرورگر و آمار بازدید در وب‌سایت یاسمین سراقی."
         : "How Yasamin Soraghi’s portfolio handles contact messages, browser preferences and optional page-view analytics.",
     alternates: {
       canonical: `/${locale}/privacy`,
@@ -32,9 +33,9 @@ export default async function Privacy({
     <>
       <Header locale={locale} />
       <main id="main" className="legal-main">
-        <a className="text-link" href={`/${locale}`}>
+        <Link className="text-link" href={`/${locale}`}>
           ← {c.back}
-        </a>
+        </Link>
         <h1>{c.privacy}</h1>
         <p className="legal-date">
           {pick(locale, "Updated 23 September 2026", "به‌روزرسانی: ۱ مهر ۱۴۰۵")}
@@ -43,7 +44,7 @@ export default async function Privacy({
           {pick(
             locale,
             "This is the personal portfolio of Yasamin Soraghi, based in Tehran, Iran. For privacy questions or a request to remove a message, email foryxolabels@gmail.com.",
-            "این وب‌سایت پورتفولیوی شخصی یاسمن سراقی در تهران، ایران است. برای پرسش درباره حریم خصوصی یا درخواست حذف پیام، به foryxolabels@gmail.com ایمیل بزنید.",
+            "این وب‌سایت پورتفولیوی شخصی یاسمین سراقی در تهران، ایران است. برای پرسش درباره حریم خصوصی یا درخواست حذف پیام، به foryxolabels@gmail.com ایمیل بزنید.",
           )}
         </p>
         <h2>

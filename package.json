@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
+    "build:pages": "node scripts/build-pages.mjs",
     "build:worker": "opennextjs-cloudflare build",
     "start": "next start --port 3000",
     "lint": "eslint .",

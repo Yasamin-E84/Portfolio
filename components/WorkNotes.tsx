@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pick, type Locale } from "@/lib/content";
 
 export function PortfolioStudy({
@@ -29,32 +30,70 @@ export function PortfolioStudy({
     descriptions[category as keyof typeof descriptions] || descriptions.all;
   return (
     <section className="section-shell implementation-study">
-      <article className="directory-note">
-        <p className="eyebrow">
-          NEXT.JS / {category === "all" ? "FULL STACK" : category.toUpperCase()}
-        </p>
-        <h2>{pick(locale, "The portfolio itself", "خودِ این پورتفولیو")}</h2>
-        <p>{pick(locale, text[0], text[1])}</p>
-        <div className="tech-chips">
-          <span>Next.js</span>
-          <span>TypeScript</span>
-          <span>SQLite</span>
-          <span>Zod</span>
-        </div>
-        <div className="project-links">
-          <a
-            className="text-link"
-            href="https://github.com/Yasamin-E84/Portfolio"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {pick(locale, "View the implementation", "دیدن پیاده‌سازی")} ↗
-          </a>
-          <a className="text-link" href={`/${locale}#contact`}>
-            {pick(locale, "Try the contact form", "فرم تماس را ببینید")} ↗
-          </a>
-        </div>
-      </article>
+      <div className="implementation-grid">
+        <article className="directory-note">
+          <p className="eyebrow">
+            NEXT.JS /{" "}
+            {category === "all" ? "FULL STACK" : category.toUpperCase()}
+          </p>
+          <h2>{pick(locale, "The portfolio itself", "خودِ این پورتفولیو")}</h2>
+          <p>{pick(locale, text[0], text[1])}</p>
+          <div className="tech-chips">
+            <span>Next.js</span>
+            <span>TypeScript</span>
+            <span>SQLite / D1</span>
+            <span>Zod</span>
+          </div>
+          <div className="project-links">
+            <a
+              className="text-link"
+              href="https://github.com/Yasamin-E84/Portfolio"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {pick(locale, "View the implementation", "دیدن پیاده‌سازی")} ↗
+            </a>
+            <Link className="text-link" href={`/${locale}#contact`}>
+              {pick(locale, "Try the contact form", "فرم تماس را ببینید")} ↗
+            </Link>
+          </div>
+        </article>
+        <article className="directory-note">
+          <p className="eyebrow">NEXT.JS / PLATFORM BACKEND</p>
+          <h2>Foryxo Menu</h2>
+          <p>
+            {pick(
+              locale,
+              "A production-scale digital-menu platform with authentication, menu publishing, orders, quotes, invoices, payments, uploads, role-based dashboards and database migrations. The public Pages edition shows the real interface; the repository contains the server and data layers.",
+              "پلتفرم منوی دیجیتال با احراز هویت، انتشار منو، سفارش‌ها، پیش‌فاکتور، صورت‌حساب، پرداخت، آپلود، داشبوردهای نقش‌محور و مایگریشن پایگاه داده. نسخه عمومی Pages رابط واقعی را نشان می‌دهد و لایه‌های سرور و داده در مخزن پروژه قرار دارند.",
+            )}
+          </p>
+          <div className="tech-chips">
+            <span>Next.js</span>
+            <span>Drizzle ORM</span>
+            <span>PostgreSQL</span>
+            <span>REST APIs</span>
+          </div>
+          <div className="project-links">
+            <a
+              className="text-link"
+              href="https://github.com/Foryxo/foryxo-menu"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {pick(locale, "View the full-stack source", "دیدن کد فول‌استک")} ↗
+            </a>
+            <a
+              className="text-link"
+              href="https://foryxo.github.io/foryxo-menu/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {pick(locale, "Open the public interface", "دیدن رابط عمومی")} ↗
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
   );
 }

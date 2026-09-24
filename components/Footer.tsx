@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { copy, type Locale } from "@/lib/content";
+import { copy, publicPath, type Locale } from "@/lib/content";
 import { CookiePreferences, Consent } from "./Consent";
 export function Footer({ locale }: { locale: Locale }) {
   const c = copy[locale];
@@ -20,11 +20,15 @@ export function Footer({ locale }: { locale: Locale }) {
         </div>
       </footer>
       <div className="mobile-cta">
-        <a href={`/${locale}#contact`}>
+        <a href={publicPath(`/${locale}#contact`)}>
           {c.contact}
           <span aria-hidden="true">↗</span>
         </a>
-        <a href="/cv/yasamin-soraghi.pdf" target="_blank" rel="noreferrer">
+        <a
+          href={publicPath("/cv/yasamin-soraghi.pdf")}
+          target="_blank"
+          rel="noreferrer"
+        >
           {locale === "en" ? "CV ↗" : "رزومه ↗"}
         </a>
       </div>
