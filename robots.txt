@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /en/thank-you
+Disallow: /fa/thank-you
+
+Sitemap: https://yasamin-e84.github.io/Portfolio/sitemap.xml

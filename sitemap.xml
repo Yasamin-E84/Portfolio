@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa" />
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/works</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/works" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/works" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/about</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/about" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/about" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/privacy</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/privacy" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/privacy" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/terms</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/terms" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/terms" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa" />
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/works</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/works" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/works" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/about</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/about" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/about" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/privacy</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/privacy" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/privacy" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/terms</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/terms" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/terms" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+</urlset>

@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,29460,t=>{"use strict";var e=t.i(71645);t.s(["DocumentLocale",0,function({locale:t}){return(0,e.useEffect)(()=>{document.documentElement.lang=t,document.documentElement.dir="fa"===t?"rtl":"ltr"},[t]),null}])}]);
