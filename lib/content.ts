@@ -137,7 +137,7 @@ export const copy = {
     motionEyebrow: "03 / IN MOTION",
     motionTitle: "A still image is just the beginning.",
     motionIntro:
-      "Selected After Effects studies. Press play to see the work; videos load only when you choose one.",
+      "Selected After Effects studies, presented in a player drawn especially for this notebook.",
     editingTitle: "Cut to the story.",
     editingIntro:
       "Social edits for CodeOceans and Dr. Soraghi. My role: video editing, pacing and captions.",
@@ -220,7 +220,7 @@ export const copy = {
     motionEyebrow: "۰۳ / در حرکت",
     motionTitle: "یک تصویر ثابت، فقط آغاز ماجراست.",
     motionIntro:
-      "منتخب تمرین‌های افتر افکتس. ویدئوها فقط پس از انتخاب شما بارگذاری می‌شوند.",
+      "منتخب تمرین‌های افتر افکتس؛ با پخش‌کننده‌ای که مخصوص همین دفتر طراحی شده است.",
     editingTitle: "روایت، در چند برش.",
     editingIntro:
       "تدوین محتوای اجتماعی برای CodeOceans و دکتر سراقی؛ نقش من: تدوین ویدئو، تنظیم ریتم و زیرنویس.",

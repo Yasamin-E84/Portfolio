@@ -1,51 +1,43 @@
 "use client";
-import { useRef, useState } from "react";
+
 import { copy, publicPath, type Locale } from "@/lib/content";
+import { PaperVideoPlayer } from "./ProjectModal";
+
 export function Video({
   file,
   title,
   note,
   locale,
   portrait = false,
+  onOpen,
 }: {
   file: string;
   title: string;
   note: string;
   locale: Locale;
   portrait?: boolean;
+  onOpen?: () => void;
 }) {
-  const [playing, setPlaying] = useState(false);
   const c = copy[locale];
   return (
     <figure className={`video-sheet ${portrait ? "portrait-video" : ""}`}>
       <div className="video-frame">
-        {playing ? (
-          <video
-            controls
-            autoPlay
-            playsInline
-            preload="metadata"
-            src={publicPath(`/media/video/${file}.mp4`)}
-            poster={publicPath(`/media/video/${file}.webp`)}
-            aria-label={title}
-          ></video>
-        ) : (
+        <PaperVideoPlayer
+          src={publicPath(`/media/video/${file}.mp4`)}
+          poster={publicPath(`/media/video/${file}.webp`)}
+          title={title}
+          locale={locale}
+          portrait={portrait}
+        />
+        {onOpen && (
           <button
-            className="video-poster"
-            onClick={() => setPlaying(true)}
-            aria-label={`${c.play}: ${title}`}
+            type="button"
+            className="folio-open"
+            onClick={onOpen}
+            aria-label={`${c.imageOpen}: ${title}`}
           >
-            <img
-              src={publicPath(`/media/video/${file}.webp`)}
-              alt={title}
-              width={portrait ? 405 : 720}
-              height={portrait ? 720 : 405}
-              loading="lazy"
-            />
-            <span className="play-button" aria-hidden="true">
-              ▷
-            </span>
-            <span className="play-label">{c.play}</span>
+            <span aria-hidden="true">↗</span>
+            {locale === "fa" ? "ورق‌زدن پروژه‌ها" : "open folio"}
           </button>
         )}
       </div>
@@ -56,26 +48,29 @@ export function Video({
     </figure>
   );
 }
+
 export function Artwork({
   file,
   title,
   note,
   locale,
   wide = false,
+  onOpen,
 }: {
   file: string;
   title: string;
   note: string;
   locale: Locale;
   wide?: boolean;
+  onOpen: () => void;
 }) {
-  const dialog = useRef<HTMLDialogElement>(null);
   const c = copy[locale];
   return (
     <figure className={`art-sheet ${wide ? "art-wide" : ""}`}>
       <button
+        type="button"
         className="art-preview"
-        onClick={() => dialog.current?.showModal()}
+        onClick={onOpen}
         aria-label={`${c.imageOpen}: ${title}`}
       >
         <img
@@ -91,24 +86,6 @@ export function Artwork({
         <strong>{title}</strong>
         <span>{note}</span>
       </figcaption>
-      <dialog
-        ref={dialog}
-        className="art-dialog"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) dialog.current?.close();
-        }}
-      >
-        <button
-          autoFocus
-          className="dialog-close"
-          onClick={() => dialog.current?.close()}
-          aria-label={c.close}
-        >
-          ×
-        </button>
-        <img src={publicPath(`/media/${file}.webp`)} alt={title} />
-        <p>{title}</p>
-      </dialog>
     </figure>
   );
 }

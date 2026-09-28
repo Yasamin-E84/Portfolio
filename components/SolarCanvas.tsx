@@ -136,7 +136,7 @@ export default function SolarCanvas({
         70,
       );
       sun.scale.setScalar(solar.radius);
-      if (!reduced) sunSurface.rotation.y = time * 0.00007;
+      if (!reduced) sunSurface.rotation.y = time * 0.000105;
       meshes.forEach((mesh, i) => {
         const point = points[i];
         // The whole system begins physically behind the centered sun and opens together.
@@ -153,7 +153,7 @@ export default function SolarCanvas({
             ? destinationScale
             : mesh.scale.x + (destinationScale - mesh.scale.x) * 0.15,
         );
-        if (!reduced) surfaces[i].rotation.y = time * (0.00008 + i * 0.000008);
+        if (!reduced) surfaces[i].rotation.y = time * (0.00012 + i * 0.00001);
       });
       onFrame({ points, width: w, height: h });
       renderer.render(scene, camera);

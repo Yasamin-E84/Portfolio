@@ -1,12 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { copy, publicPath, type Locale } from "@/lib/content";
-function subscribe(cb: () => void) {
-  window.addEventListener("ys-theme", cb);
-  return () => window.removeEventListener("ys-theme", cb);
-}
 export function ThemeSwitch({
   locale,
   large = false,
@@ -14,14 +10,22 @@ export function ThemeSwitch({
   locale: Locale;
   large?: boolean;
 }) {
-  const theme = useSyncExternalStore(
-    subscribe,
-    () => document.documentElement.dataset.theme || "light",
-    () => "light",
-  );
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  useEffect(() => {
+    const sync = () =>
+      setTheme(
+        document.documentElement.dataset.theme === "dark" ? "dark" : "light",
+      );
+    sync();
+    window.addEventListener("ys-theme", sync);
+    return () => window.removeEventListener("ys-theme", sync);
+  }, []);
   function toggle() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+    const currentTheme =
+      document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = nextTheme;
+    setTheme(nextTheme);
     try {
       localStorage.setItem("ys-theme", nextTheme);
     } catch {}
