@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { DocumentLocale } from "@/components/DocumentLocale";
+import { PageTurnTransition } from "@/components/PageTurnTransition";
 import { isLocale } from "@/lib/content";
 
 export const dynamicParams = false;
@@ -26,6 +27,7 @@ export default async function LocaleLayout({
       className="locale-root"
     >
       <DocumentLocale locale={locale} />
+      <PageTurnTransition />
       {children}
     </div>
   );

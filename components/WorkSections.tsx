@@ -60,8 +60,9 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
   const c = copy[locale];
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const projectGallery: GalleryItem[] = projects.map((project) => ({
-    kind: "image",
+    kind: project.live ? "website" : "image",
     src: publicPath(`/media/projects/${project.image}.webp`),
+    liveUrl: project.live,
     title: project.name,
     note: pick(locale, project.en, project.fa),
     description: pick(locale, project.enText, project.faText),

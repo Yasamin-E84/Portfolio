@@ -80,7 +80,7 @@ export function planetLayout(
     // A small, reversible journey along each actual ellipse, never a racing orbit.
     const drift = reduced
       ? 0
-      : Math.sin(time / (14000 + index * 1750) + index) * 0.019;
+      : Math.sin(time / (8200 + index * 1000) + index) * 0.026;
     return {
       ...onOrbit(shape, shape.angle + drift),
       radius: width < 700 ? radius * 0.66 : radius,

@@ -18,6 +18,18 @@
   font-weight: 400;
 }
 @font-face {
+  font-family: Dastnevis;
+  src: url("/fonts/dastnevis.otf") format("opentype");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Patrick Hand";
+  src: url("/fonts/patrick-hand.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
   font-family: "Aref Ruqaa Ink";
   src: url("/fonts/aref-ruqaa-ink-bold.ttf") format("truetype");
   font-display: swap;
@@ -2239,6 +2251,19 @@ body:before {
     inset 12px 0 26px #76603b08,
     inset -10px 0 20px #76603b06;
 }
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  opacity: .34;
+  background:
+    linear-gradient(90deg, transparent 49.55%, #49391d12 49.83%, #fff7df18 50.05%, transparent 50.42%),
+    linear-gradient(14deg, transparent 0 61.7%, #4f3b1d0b 61.9%, #fff9e417 62.08%, transparent 62.35%),
+    linear-gradient(166deg, transparent 0 74.7%, #5741210a 74.9%, #fff9e412 75.1%, transparent 75.32%);
+  mix-blend-mode: multiply;
+}
 .site-header {
   border-bottom: 3px double var(--line);
 }
@@ -3258,8 +3283,26 @@ body:before {
 [data-locale="fa"] .art-sheet figcaption strong,
 [data-locale="fa"] .video-sheet figcaption strong,
 [data-locale="fa"] .paper-transition i {
-  font-family: "Aref Ruqaa Ink", Vazirmatn, serif;
+  font-family: Dastnevis, "Aref Ruqaa Ink", Vazirmatn, serif;
   font-weight: 400;
+}
+[data-locale="fa"] .hand-note,
+[data-locale="fa"] .hero h1 em,
+[data-locale="fa"] .notebook-introduction h2 em,
+[data-locale="fa"] .project-modal-note,
+[data-locale="fa"] .drag-note,
+[data-locale="fa"] .art-sheet figcaption strong,
+[data-locale="fa"] .video-sheet figcaption strong {
+  font-family: Dastnevis, "Aref Ruqaa Ink", Vazirmatn, serif;
+}
+[data-locale="en"] .hand-note,
+[data-locale="en"] .hero h1 em,
+[data-locale="en"] .notebook-introduction h2 em,
+[data-locale="en"] .project-modal-note,
+[data-locale="en"] .drag-note,
+[data-locale="en"] .art-sheet figcaption strong,
+[data-locale="en"] .video-sheet figcaption strong {
+  font-family: "Patrick Hand", Caveat, cursive;
 }
 .notebook-introduction h2 {
   font-size: clamp(2.65rem, 5vw, 5rem);
@@ -3459,6 +3502,9 @@ body:before {
 
 /* Draggable project modal with visible navigation and pagination. */
 .project-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   width: min(1120px, calc(100vw - 30px));
   max-width: none;
   max-height: calc(100dvh - 24px);
@@ -3468,6 +3514,31 @@ body:before {
   color: var(--ink);
   background: transparent;
 }
+.project-modal-stage-wrap {
+  min-width: 0;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+.project-modal-stage-wrap[data-turn="next-out"] .project-modal-stage {
+  animation: folio-next-out .22s ease-in both;
+  transform-origin: left center;
+}
+.project-modal-stage-wrap[data-turn="next-in"] .project-modal-stage {
+  animation: folio-next-in .26s ease-out both;
+  transform-origin: right center;
+}
+.project-modal-stage-wrap[data-turn="prev-out"] .project-modal-stage {
+  animation: folio-prev-out .22s ease-in both;
+  transform-origin: right center;
+}
+.project-modal-stage-wrap[data-turn="prev-in"] .project-modal-stage {
+  animation: folio-prev-in .26s ease-out both;
+  transform-origin: left center;
+}
+@keyframes folio-next-out { to { opacity: .12; transform: rotateY(-82deg) translateX(-5%); } }
+@keyframes folio-next-in { from { opacity: .12; transform: rotateY(82deg) translateX(5%); } }
+@keyframes folio-prev-out { to { opacity: .12; transform: rotateY(82deg) translateX(5%); } }
+@keyframes folio-prev-in { from { opacity: .12; transform: rotateY(-82deg) translateX(-5%); } }
 .project-modal::backdrop {
   background:
     radial-gradient(circle at center, #10120ccc, #080a08ef),
@@ -3571,6 +3642,55 @@ body:before {
 .project-modal-stage .paper-player.is-portrait {
   width: min(100%, 390px);
 }
+.site-preview-shell {
+  display: grid;
+  grid-template-rows: 38px minmax(420px, 62vh);
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e8dbbd73;
+  background: #f4eedf;
+  box-shadow: 5px 6px 0 #0003;
+  transform: rotate(.18deg);
+}
+.site-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  color: #40382d;
+  border-bottom: 1px solid #74684f;
+  background: #e9ddc4 url("/media/paper-fibers.webp");
+}
+.site-preview-bar span { width: 9px; height: 9px; border: 1px solid #584e3d; border-radius: 50%; background: #b78068; }
+.site-preview-bar span:nth-child(2) { background: #c8a55e; }
+.site-preview-bar span:nth-child(3) { background: #78928a; }
+.site-preview-bar strong { margin-inline-start: 6px; font: 14px "Patrick Hand", Caveat, cursive; }
+.site-preview-shell iframe { width: 100%; height: 100%; border: 0; background: white; }
+
+.video-poster-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: #f7ecd3;
+  background: #111;
+  cursor: pointer;
+}
+.video-poster-trigger img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; opacity: .9; }
+.portrait-video .video-poster-trigger img { aspect-ratio: 9 / 16; max-height: 480px; object-fit: contain; }
+.video-poster-play { position: absolute; inset: 50% auto auto 50%; display:grid; place-items:center; width:72px; height:58px; border:2px solid currentColor; border-radius:48% 52% 46% 54%; background:#191910c7; transform:translate(-50%,-50%) rotate(-3deg); font-size:25px; }
+.video-poster-trigger small { position:absolute; inset-inline-end:10px; bottom:9px; font:16px "Patrick Hand", Caveat, cursive; }
+.video-sheet:nth-child(3n + 1) { transform: translateY(5px) rotate(-.55deg); }
+.video-sheet:nth-child(3n + 2) { transform: translateY(-3px) rotate(.7deg); }
+.project-sheet:nth-child(3n + 1) { transform: rotate(-.25deg); }
+.project-sheet:nth-child(3n + 2) { transform: rotate(.35deg); }
+
+.page-turn-transition { position:fixed; inset:0; z-index:10020; pointer-events:none; perspective:1800px; visibility:hidden; }
+.page-turn-transition i { position:absolute; inset:-2%; display:block; background:var(--sheet) url("/media/paper-fibers.webp"); background-blend-mode:multiply; box-shadow:-28px 0 70px #0007; transform:rotateY(94deg); transform-origin:right center; }
+.page-turn-transition[data-active="true"] { visibility:visible; }
+.page-turn-transition[data-active="true"] i { animation:page-leaf .72s cubic-bezier(.62,.02,.27,1) both; }
+@keyframes page-leaf { 0% { transform:rotateY(94deg); } 48% { transform:rotateY(0deg); } 100% { transform:rotateY(-94deg); transform-origin:left center; } }
 .drag-note {
   position: absolute;
   inset-inline-end: 18px;
@@ -3693,6 +3813,7 @@ body:before {
     min-height: 280px;
     padding: 7px;
   }
+  .site-preview-shell { grid-template-rows: 34px minmax(350px, 48vh); }
   .project-modal-stage > img {
     height: min(48vh, 470px);
   }
@@ -3718,4 +3839,6 @@ body:before {
   .paper-player-controls {
     transition: none;
   }
+  .page-turn-transition { display: none; }
+  .project-modal-stage-wrap .project-modal-stage { animation: none !important; }
 }

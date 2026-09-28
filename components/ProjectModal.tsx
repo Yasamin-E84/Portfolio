@@ -17,8 +17,9 @@ export type GalleryItem = {
   title: string;
   note: string;
   description?: string;
-  kind: "image" | "video";
+  kind: "image" | "video" | "website";
   src: string;
+  liveUrl?: string;
   poster?: string;
   portrait?: boolean;
   tags?: string[];
@@ -204,12 +205,33 @@ export function ProjectModal({
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dragStart = useRef<number | null>(null);
+  const turnTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [dragX, setDragX] = useState(0);
+  const [turn, setTurn] = useState<"next-out" | "next-in" | "prev-out" | "prev-in" | "">("");
   const item = items[activeIndex];
 
   const move = (direction: number) => {
+    if (turn) return;
     setDragX(0);
-    setActiveIndex((activeIndex + direction + items.length) % items.length);
+    const way = direction > 0 ? "next" : "prev";
+    setTurn(`${way}-out`);
+    turnTimer.current = setTimeout(() => {
+      setActiveIndex((activeIndex + direction + items.length) % items.length);
+      setTurn(`${way}-in`);
+      turnTimer.current = setTimeout(() => setTurn(""), 260);
+    }, 210);
+  };
+
+  const moveTo = (index: number) => {
+    if (turn || index === activeIndex) return;
+    setDragX(0);
+    const way = index > activeIndex ? "next" : "prev";
+    setTurn(`${way}-out`);
+    turnTimer.current = setTimeout(() => {
+      setActiveIndex(index);
+      setTurn(`${way}-in`);
+      turnTimer.current = setTimeout(() => setTurn(""), 260);
+    }, 210);
   };
 
   useEffect(() => {
@@ -219,6 +241,7 @@ export function ProjectModal({
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = original;
+      if (turnTimer.current) clearTimeout(turnTimer.current);
     };
   }, []);
 
@@ -278,6 +301,7 @@ export function ProjectModal({
           </button>
         </header>
 
+        <div className="project-modal-stage-wrap" data-turn={turn}>
         <div
           className="project-modal-stage"
           onPointerDown={startDrag}
@@ -297,12 +321,27 @@ export function ProjectModal({
               locale={locale}
               portrait={item.portrait}
             />
+          ) : item.kind === "website" && item.liveUrl ? (
+            <div className="site-preview-shell">
+              <div className="site-preview-bar" aria-hidden="true">
+                <span /><span /><span />
+                <strong>{new URL(item.liveUrl).hostname}</strong>
+              </div>
+              <iframe
+                key={`${activeIndex}-${item.liveUrl}`}
+                src={item.liveUrl}
+                title={`${item.title} — ${pick(locale, "live website", "وب‌سایت زنده")}`}
+                loading="lazy"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+              />
+            </div>
           ) : (
             <img src={item.src} alt={item.title} draggable={false} />
           )}
           <span className="drag-note" aria-hidden="true">
             ↔ {pick(locale, "drag to leaf through", "برای ورق‌زدن بکشید")}
           </span>
+        </div>
         </div>
 
         <div className="project-modal-copy">
@@ -367,7 +406,7 @@ export function ProjectModal({
               type="button"
               key={`${entry.title}-${index}`}
               className={index === activeIndex ? "is-active" : ""}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => moveTo(index)}
               aria-label={`${index + 1}: ${entry.title}`}
               aria-current={index === activeIndex ? "true" : undefined}
             />

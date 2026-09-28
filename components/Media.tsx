@@ -1,7 +1,6 @@
 "use client";
 
 import { copy, publicPath, type Locale } from "@/lib/content";
-import { PaperVideoPlayer } from "./ProjectModal";
 
 export function Video({
   file,
@@ -22,13 +21,16 @@ export function Video({
   return (
     <figure className={`video-sheet ${portrait ? "portrait-video" : ""}`}>
       <div className="video-frame">
-        <PaperVideoPlayer
-          src={publicPath(`/media/video/${file}.mp4`)}
-          poster={publicPath(`/media/video/${file}.webp`)}
-          title={title}
-          locale={locale}
-          portrait={portrait}
-        />
+        <button
+          type="button"
+          className="video-poster-trigger"
+          onClick={onOpen}
+          aria-label={`${c.imageOpen}: ${title}`}
+        >
+          <img src={publicPath(`/media/video/${file}.webp`)} alt="" loading="lazy" />
+          <span className="video-poster-play" aria-hidden="true">▶</span>
+          <small>{locale === "fa" ? "نمایش و پخش" : "open & play"}</small>
+        </button>
         {onOpen && (
           <button
             type="button"
