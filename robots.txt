@@ -1,6 +1,8 @@
 User-Agent: *
 Allow: /
 Disallow: /api/
+Disallow: /login
+Disallow: /admin
 Disallow: /en/thank-you
 Disallow: /fa/thank-you
 
