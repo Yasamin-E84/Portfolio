@@ -9,6 +9,7 @@ export function Video({
   locale,
   portrait = false,
   onOpen,
+  poster,
 }: {
   file: string;
   title: string;
@@ -16,6 +17,7 @@ export function Video({
   locale: Locale;
   portrait?: boolean;
   onOpen?: () => void;
+  poster?: string;
 }) {
   const c = copy[locale];
   return (
@@ -27,7 +29,7 @@ export function Video({
           onClick={onOpen}
           aria-label={`${c.imageOpen}: ${title}`}
         >
-          <img src={publicPath(`/media/video/${file}.webp`)} alt="" loading="lazy" />
+          <img src={poster || publicPath(`/media/video/${file}.webp`)} alt="" loading="lazy" />
           <span className="video-poster-play" aria-hidden="true">▶</span>
           <small>{locale === "fa" ? "نمایش و پخش" : "open & play"}</small>
         </button>
@@ -58,6 +60,7 @@ export function Artwork({
   locale,
   wide = false,
   onOpen,
+  src,
 }: {
   file: string;
   title: string;
@@ -65,6 +68,7 @@ export function Artwork({
   locale: Locale;
   wide?: boolean;
   onOpen: () => void;
+  src?: string;
 }) {
   const c = copy[locale];
   return (
@@ -76,7 +80,7 @@ export function Artwork({
         aria-label={`${c.imageOpen}: ${title}`}
       >
         <img
-          src={publicPath(`/media/${file}.webp`)}
+          src={src || publicPath(`/media/${file}.webp`)}
           alt={title}
           loading="lazy"
           width="700"

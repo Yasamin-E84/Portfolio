@@ -2,16 +2,19 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "yasamin-portfolio",
   "main": ".open-next/worker.js",
-  "compatibility_date": "2026-09-23",
+  "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "yasamin-portfolio-local",
-      "database_id": "local-portfolio-db",
+      "database_name": "yasamin-portfolio",
+      "database_id": "2587c230-de20-4d07-a207-86f1b5b0e424",
       "migrations_dir": "drizzle",
     },
   ],
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://yasamin-e84.github.io/Portfolio"
+  },
   "observability": { "enabled": true, "traces": { "enabled": true } },
 }

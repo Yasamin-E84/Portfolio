@@ -1,12 +1,17 @@
-import { copy, pick, publicPath, type Locale } from "@/lib/content";
+"use client";
+
+import { copy, pick, type Locale } from "@/lib/content";
+import { usePortfolioContent } from "./PortfolioContent";
+import { resolvePortfolioUrl } from "@/lib/portfolio-config";
 export function AboutContent({ locale }: { locale: Locale }) {
   const c = copy[locale];
+  const managed = usePortfolioContent();
   return (
     <section className="about-section section-shell" id="about">
       <div className="portrait-sheet">
         <span className="paper-tape" />
         <img
-          src={publicPath("/media/yasamin-portrait.webp")}
+          src={resolvePortfolioUrl(managed.profile.portraitUrl, process.env.NEXT_PUBLIC_BASE_PATH || "")}
           alt={c.name}
           width="700"
           height="933"
@@ -21,12 +26,12 @@ export function AboutContent({ locale }: { locale: Locale }) {
       </div>
       <div className="about-copy">
         <p className="eyebrow">{c.aboutEyebrow}</p>
-        <h2>{c.aboutTitle}</h2>
-        <p>{c.aboutText}</p>
-        <p>{c.aboutText2}</p>
+        <h2>{managed.about.title[locale]}</h2>
+        <p>{managed.about.body[locale]}</p>
+        <p>{managed.about.body2[locale]}</p>
         <a
           className="button button-outline"
-          href={publicPath("/cv/yasamin-soraghi.pdf")}
+          href={resolvePortfolioUrl(managed.profile.resumeUrl, process.env.NEXT_PUBLIC_BASE_PATH || "")}
           target="_blank"
           rel="noreferrer"
         >

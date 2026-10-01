@@ -77,6 +77,8 @@ try {
     NEXT_PUBLIC_BASE_PATH: "/Portfolio",
     NEXT_PUBLIC_SITE_URL: "https://yasamin-e84.github.io/Portfolio",
     NEXT_PUBLIC_STATIC_SITE: "1",
+    NEXT_PUBLIC_CONTENT_API: "https://yasamin-portfolio.pwvzvxulmp0yw4u-ov3ihdw92l2.workers.dev/api/content",
+    NEXT_PUBLIC_ADMIN_ORIGIN: "https://yasamin-portfolio.pwvzvxulmp0yw4u-ov3ihdw92l2.workers.dev",
   });
 
   const outputRoot = path.join(root, "out");

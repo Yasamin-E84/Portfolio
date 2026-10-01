@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { copy, pick, type Locale } from "@/lib/content";
 import { Header } from "./Header";
@@ -5,8 +7,10 @@ import { Footer } from "./Footer";
 import { Solar } from "./Solar";
 import { NotebookStudy } from "./NotebookStudy";
 import { ContactSection } from "./ContactSection";
+import { usePortfolioContent } from "./PortfolioContent";
 export function Home({ locale }: { locale: Locale }) {
   const c = copy[locale];
+  const managed = usePortfolioContent();
   return (
     <>
       <Header locale={locale} cosmic />
@@ -30,13 +34,14 @@ export function Home({ locale }: { locale: Locale }) {
         <section className="notebook-introduction" id="notebook">
           <div className="hero-top">
             <div className="hero-copy">
-              <p className="eyebrow">{c.eyebrow}</p>
+              <p className="eyebrow">{managed.profile.eyebrow[locale]}</p>
               <h2>
-                {c.title}
+                {managed.profile.headline[locale]}
                 <br />
-                <em>{c.title2}</em>
+                <em>{managed.profile.headlineAccent[locale]}</em>
               </h2>
-              <p className="hero-intro">{c.intro}</p>
+              <p className="hero-intro">{managed.profile.intro[locale]}</p>
+              {managed.settings.openToWork && <p className="availability-note"><i />{managed.profile.availability[locale]}<span>{managed.profile.location[locale]}</span></p>}
               <div className="hero-actions">
                 <Link className="button button-dark" href={`/${locale}/works`}>
                   {c.explore}

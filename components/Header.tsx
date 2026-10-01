@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { copy, publicPath, type Locale } from "@/lib/content";
+import { usePortfolioContent } from "./PortfolioContent";
 export function ThemeSwitch({
   locale,
   large = false,
@@ -76,6 +77,7 @@ export function Header({
 }) {
   const c = copy[locale],
     pathname = usePathname();
+  const managed = usePortfolioContent();
   const other = locale === "en" ? "fa" : "en";
   function remember() {
     document.cookie = `ys-locale=${other};path=/;max-age=31536000;SameSite=Lax`;
@@ -122,6 +124,7 @@ export function Header({
           ))}
         </nav>
         <div className="header-tools">
+          {managed.settings.openToWork && <a className="open-to-work" href={`/${locale}#contact`}><i />{locale === "fa" ? "آماده همکاری" : "Open to work"}</a>}
           <a
             className="locale-switch"
             href={publicPath(

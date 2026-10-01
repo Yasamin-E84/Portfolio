@@ -34,7 +34,8 @@ export function Consent({ locale }: { locale: Locale }) {
       !/^\/(en|fa)(\/(works|about|privacy|terms|thank-you))?$/.test(pathname)
     )
       return;
-    void fetch("/api/analytics", {
+      const endpoint = process.env.NEXT_PUBLIC_STATIC_SITE === "1" && process.env.NEXT_PUBLIC_ADMIN_ORIGIN ? `${process.env.NEXT_PUBLIC_ADMIN_ORIGIN}/api/analytics` : "/api/analytics";
+      void fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ consent: true, locale, path: pathname }),

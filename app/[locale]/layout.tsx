@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { DocumentLocale } from "@/components/DocumentLocale";
 import { PageTurnTransition } from "@/components/PageTurnTransition";
+import { PortfolioContentProvider } from "@/components/PortfolioContent";
 import { isLocale } from "@/lib/content";
 
 export const dynamicParams = false;
@@ -28,7 +29,7 @@ export default async function LocaleLayout({
     >
       <DocumentLocale locale={locale} />
       <PageTurnTransition />
-      {children}
+      <PortfolioContentProvider locale={locale}>{children}</PortfolioContentProvider>
     </div>
   );
 }

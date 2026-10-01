@@ -17,6 +17,21 @@ export interface SqlDatabase {
   prepare(sql: string): SqlStatement;
 }
 
+export async function getCloudflareEnv(): Promise<Record<string, unknown> | null> {
+  try {
+    const { getCloudflareContext } = await import("@opennextjs/cloudflare");
+    const { env } = await getCloudflareContext({ async: true });
+    return env as unknown as Record<string, unknown>;
+  } catch { return null; }
+}
+
+export async function getBoundDatabase(): Promise<SqlDatabase | null> {
+  const env = await getCloudflareEnv();
+  const db = env?.DB;
+  return db && typeof db === "object" && "prepare" in db && typeof db.prepare === "function"
+    ? db as SqlDatabase : null;
+}
+
 export function normalizeTrustedOrigin(value: unknown): string {
   if (typeof value !== "string") return "";
   try {
@@ -114,8 +129,8 @@ export function createStore(db: SqlDatabase): ContactStore & AnalyticsStore {
 
 export async function getDatabaseServices() {
   try {
-    const { getCloudflareContext } = await import("@opennextjs/cloudflare");
-    const { env } = await getCloudflareContext({ async: true });
+    const env = await getCloudflareEnv();
+    if (!env) return null;
     // Runtime validation keeps plain Next development honest when a binding is absent.
     const db: unknown = Reflect.get(env, "DB");
     if (
