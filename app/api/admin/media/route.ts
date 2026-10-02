@@ -1,11 +1,13 @@
 import { requireAdmin, recordAudit, sameOrigin } from "@/lib/admin-api";
 import { getMediaBucket } from "@/lib/media-storage";
+import { getBoundDatabase } from "@/lib/db";
 
 const limits = {
   image: 15 * 1024 * 1024,
   video: 95 * 1024 * 1024,
   file: 95 * 1024 * 1024,
 } as const;
+const d1ImageLimit = 1_500_000;
 
 const mimeExtensions: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -40,7 +42,6 @@ export async function POST(request: Request) {
   if (!request.body) return Response.json({ error: "The file is empty" }, { status: 400 });
 
   const bucket = await getMediaBucket();
-  if (!bucket) return Response.json({ error: "Media storage is not enabled yet" }, { status: 503 });
 
   const original = (request.headers.get("x-file-name") || "upload").slice(0, 180);
   const base = original.replace(/\.[^.]+$/, "").normalize("NFKD").replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "upload";
@@ -49,19 +50,32 @@ export async function POST(request: Request) {
   const disposition = kind === "file" ? `attachment; filename="${base}.${mimeExtensions[type]}"` : "inline";
 
   try {
-    await bucket.put(key, request.body, {
-      httpMetadata: {
-        contentType: type,
-        contentDisposition: disposition,
-        cacheControl: "public, max-age=31536000, immutable",
-      },
-      customMetadata: { originalName: original, uploadedBy: auth.session.email },
-    });
-    await recordAudit(auth.db, "media.upload", `${kind}:${key}`);
+    let savedKey = key;
+    if (bucket) {
+      await bucket.put(key, request.body, {
+        httpMetadata: {
+          contentType: type,
+          contentDisposition: disposition,
+          cacheControl: "public, max-age=31536000, immutable",
+        },
+        customMetadata: { originalName: original, uploadedBy: auth.session.email },
+      });
+    } else {
+      if (kind !== "image") return Response.json({ error: "Large file storage needs Cloudflare R2. Images can be uploaded now; paste a hosted URL for videos or files." }, { status: 503 });
+      if (size > d1ImageLimit) return Response.json({ error: "This image is still too large. Choose an image under 1.5 MB; the admin normally optimizes it automatically." }, { status: 413 });
+      const db = await getBoundDatabase();
+      if (!db) return Response.json({ error: "Image storage is temporarily unavailable" }, { status: 503 });
+      const bytes = await request.arrayBuffer();
+      if (bytes.byteLength !== size || bytes.byteLength > d1ImageLimit) return Response.json({ error: "The uploaded image size could not be verified" }, { status: 400 });
+      savedKey = `d1/${crypto.randomUUID()}-${base}.${mimeExtensions[type]}`;
+      await db.prepare("INSERT INTO portfolio_media (key,name,content_type,size,bytes,created_at) VALUES (?,?,?,?,?,?)")
+        .bind(savedKey, original, type, bytes.byteLength, new Uint8Array(bytes), Math.floor(Date.now() / 1000)).run();
+    }
+    await recordAudit(auth.db, "media.upload", `${kind}:${savedKey}`);
     return Response.json({
       ok: true,
-      key,
-      url: new URL(`/api/media/${key}`, request.url).toString(),
+      key: savedKey,
+      url: new URL(`/api/media/${savedKey}`, request.url).toString(),
       name: original,
       size,
       type,

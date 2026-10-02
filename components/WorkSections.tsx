@@ -11,6 +11,39 @@ import { ThemeSwitch } from "./Header";
 import { usePortfolioContent } from "./PortfolioContent";
 import { resolvePortfolioUrl } from "@/lib/portfolio-config";
 import { trackPortfolioEvent } from "@/lib/analytics-client";
+
+function projectPreviewSource(project: { imageUrl: string; desktopImageUrl?: string; mobileImageUrl?: string }, mode: "desktop" | "mobile") {
+  return mode === "mobile"
+    ? project.mobileImageUrl || project.desktopImageUrl || project.imageUrl
+    : project.desktopImageUrl || project.imageUrl;
+}
+
+function ProjectDevicePreview({ project, locale }: {
+  project: { name: string; imageUrl: string; desktopImageUrl?: string; mobileImageUrl?: string; liveUrl: string };
+  locale: Locale;
+}) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const desktop = resolvePortfolioUrl(projectPreviewSource(project, "desktop"), basePath);
+  const mobile = resolvePortfolioUrl(projectPreviewSource(project, "mobile"), basePath);
+  let host = pick(locale, "local build", "پروژه محلی");
+  if (project.liveUrl) {
+    try { host = new URL(project.liveUrl).hostname; } catch { host = pick(locale, "live preview", "پیش‌نمایش آنلاین"); }
+  }
+  const fallback = <span className="device-placeholder"><b>{project.name}</b><small>{pick(locale, "Preview coming soon", "پیش‌نمایش به‌زودی")}</small></span>;
+  return <span className="project-device-stage">
+    <span className="desktop-device" aria-hidden="true">
+      <span className="desktop-device-bar"><i/><i/><i/><small>{host}</small></span>
+      <span className="desktop-device-screen">{desktop ? <img src={desktop} alt="" loading="lazy"/> : fallback}</span>
+      <span className="desktop-device-foot"/>
+    </span>
+    <span className="mobile-device" aria-hidden="true">
+      <span className="mobile-device-speaker"/>
+      <span className="mobile-device-screen">{mobile ? <img src={mobile} alt="" loading="lazy"/> : fallback}</span>
+      <span className="mobile-device-home"/>
+    </span>
+    <span className="sr-only">{`${project.name} — ${pick(locale, "interface preview", "پیش‌نمایش رابط کاربری")}`}</span>
+  </span>;
+}
 export function DevelopmentWork({ locale }: { locale: Locale }) {
   const c = copy[locale];
   const managed = usePortfolioContent();
@@ -18,7 +51,7 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
   const [activeProject, setActiveProject] = useState<number | null>(null);
   const projectGallery: GalleryItem[] = managedProjects.map((project) => ({
     kind: project.liveUrl ? "website" : "image",
-    src: resolvePortfolioUrl(project.imageUrl, process.env.NEXT_PUBLIC_BASE_PATH || ""),
+    src: resolvePortfolioUrl(projectPreviewSource(project, "desktop"), process.env.NEXT_PUBLIC_BASE_PATH || ""),
     liveUrl: project.liveUrl,
     title: project.name,
     note: project.summary[locale],
@@ -53,13 +86,7 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
               aria-label={`${c.imageOpen}: ${p.name}`}
             >
               <span className="paper-tape" />
-              <img
-                src={resolvePortfolioUrl(p.imageUrl, process.env.NEXT_PUBLIC_BASE_PATH || "")}
-                alt={`${p.name} — ${pick(locale, "interface preview", "پیش‌نمایش رابط کاربری")}`}
-                width="1200"
-                height="833"
-                loading="lazy"
-              />
+              <ProjectDevicePreview project={p} locale={locale}/>
               <span className="preview-arrow" aria-hidden="true">
                 ↗
               </span>

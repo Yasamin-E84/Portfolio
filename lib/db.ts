@@ -9,7 +9,7 @@ import { siteUrl } from "./content";
 
 /** Minimal structural D1 boundary; deployment may supply generated CloudflareEnv. */
 export interface SqlStatement {
-  bind(...values: (string | number | null)[]): SqlStatement;
+  bind(...values: (string | number | Uint8Array | null)[]): SqlStatement;
   first<T = Record<string, unknown>>(): Promise<T | null>;
   run(): Promise<unknown>;
 }

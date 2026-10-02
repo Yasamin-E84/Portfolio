@@ -50,7 +50,7 @@ function database() {
   }
   const db: SqlDatabase = {
     prepare(sql) {
-      let values: (string | number | null)[] = [];
+      let values: (string | number | Uint8Array | null)[] = [];
       const statement: SqlStatement = {
         bind(...input) {
           values = input;
