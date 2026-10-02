@@ -257,7 +257,7 @@ export async function handleContact(
 
 export const analyticsSchema = z
   .object({
-    consent: z.literal(true),
+    consent: z.boolean().default(false),
     locale: z.enum(["en", "fa"]),
     path: z.enum([
       "/en",

@@ -27,11 +27,12 @@ function normalizedPath() {
 
 export function trackPortfolioEvent(event: PortfolioEvent, target: string, locale: Locale) {
   try {
-    if (localStorage.getItem("ys-analytics") !== "yes") return;
+    const preference = localStorage.getItem("ys-analytics");
+    if (preference === "no") return;
     void fetch(endpoint(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ consent: true, locale, path: normalizedPath(), event, target: target.slice(0, 120), sessionId: sessionId() }),
+      body: JSON.stringify({ consent: preference === "yes", locale, path: normalizedPath(), event, target: target.slice(0, 120), sessionId: sessionId() }),
       keepalive: true,
     }).catch(() => {});
   } catch {}

@@ -17,6 +17,7 @@ import {
   type SqlDatabase,
   type SqlStatement,
 } from "../lib/db";
+import { hashMobileToken, newMobileToken } from "../lib/mobile-auth";
 
 const valid = {
   name: "Test Visitor",
@@ -337,21 +338,33 @@ test("rate response includes Retry-After and only hashes, never raw addresses, a
   }
 });
 
-test("analytics requires explicit consent and rejects arbitrary routes and identifiers", async () => {
+test("analytics accepts cookieless sessions and rejects arbitrary routes and identifiers", async () => {
   let resolved = false;
   const resolver = async () => {
     resolved = true;
-    return null;
+    return { recordView: async () => true };
   };
+  assert.equal((await handleAnalytics(request({ locale: "en", path: "/en" }), resolver)).status, 204);
+  assert.equal((await handleAnalytics(request({ consent: false, locale: "en", path: "/en" }), resolver)).status, 204);
+  assert.equal(resolved, true);
+  resolved = false;
   for (const body of [
-    { locale: "en", path: "/en" },
-    { consent: false, locale: "en", path: "/en" },
     { consent: true, locale: "en", path: "/en/arbitrary-123" },
     { consent: true, locale: "fa", path: "/en" },
     { consent: true, locale: "en", path: "/en", visitorId: "private" },
   ])
     assert.equal((await handleAnalytics(request(body), resolver)).status, 400);
   assert.equal(resolved, false);
+});
+
+test("mobile alert tokens are high-entropy, URL-safe and stored only as hashes", async () => {
+  const first = newMobileToken(), second = newMobileToken();
+  assert.match(first, /^[A-Za-z0-9_-]{43}$/);
+  assert.notEqual(first, second);
+  const hash = await hashMobileToken(first);
+  assert.match(hash, /^[A-Za-z0-9_-]{43}$/);
+  assert.notEqual(hash, first);
+  assert.equal(await hashMobileToken(first), hash);
 });
 
 test("analytics aggregates one bounded row per daily page and limits bursts without visitor identifiers", async () => {

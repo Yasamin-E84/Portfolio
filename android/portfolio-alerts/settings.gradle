@@ -1,0 +1,7 @@
+pluginManagement {
+    repositories { maven { url = uri("https://redirector.gvt1.com/edgedl/android/maven2/") }; mavenCentral(); gradlePluginPortal() }
+    resolutionStrategy { eachPlugin { if (requested.id.id == "com.android.application") useModule("com.android.tools.build:gradle:${requested.version}") } }
+}
+dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { maven { url = uri("https://redirector.gvt1.com/edgedl/android/maven2/") }; mavenCentral() } }
+rootProject.name = "PortfolioAlerts"
+include(":app")

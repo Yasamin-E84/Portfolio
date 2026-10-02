@@ -30,13 +30,9 @@ export function Consent({ locale }: { locale: Locale }) {
     };
   }, []);
   useEffect(() => {
-    if (
-      choice !== "yes" ||
-      !/^\/(en|fa)(\/(works|about|privacy|terms|thank-you))?$/.test(pathname)
-    )
-      return;
+    if (!/^\/(en|fa)(\/(works|about|privacy|terms|thank-you))?$/.test(pathname)) return;
     trackPortfolioEvent("page_view", pathname, locale);
-  }, [choice, locale, pathname]);
+  }, [locale, pathname]);
   function choose(value: string) {
     try {
       localStorage.setItem("ys-analytics", value);
