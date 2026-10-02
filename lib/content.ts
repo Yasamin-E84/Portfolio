@@ -182,7 +182,7 @@ export const copy = {
       "This page seems to have drifted away. Let’s find something worth exploring.",
     cookieTitle: "A small note on privacy",
     cookieText:
-      "I use local storage to remember your theme and language. With your permission, I also count page views without visitor IDs. Your choice is yours.",
+      "I use local storage to remember your theme and language. With permission, I record a short-lived session, coarse location, pages and portfolio interactions without saving your raw IP address.",
     accept: "Allow analytics",
     reject: "Essential only",
     close: "Close",
@@ -265,7 +265,7 @@ export const copy = {
       "انگار این صفحه از مدارش خارج شده است. بیایید مسیر تازه‌ای پیدا کنیم.",
     cookieTitle: "یادداشتی درباره حریم خصوصی",
     cookieText:
-      "برای به‌خاطر سپردن زبان و تم از حافظه محلی مرورگر استفاده می‌کنم. با اجازه شما، تعداد بازدید صفحات را هم بدون شناسه بازدیدکننده می‌شمارم. انتخاب با شماست.",
+      "برای به‌خاطر سپردن زبان و تم از حافظه محلی مرورگر استفاده می‌کنم. با اجازه شما، نشست کوتاه‌مدت، موقعیت تقریبی، صفحه‌ها و تعامل با نمونه‌کارها ثبت می‌شود؛ IP خام ذخیره نمی‌شود.",
     accept: "اجازه آمارگیری",
     reject: "فقط موارد ضروری",
     close: "بستن",

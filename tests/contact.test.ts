@@ -177,6 +177,15 @@ test("explicit trusted deployment origin survives internal adapter URL rewriting
       .status,
     201,
   );
+  const githubPagesRequest = request(valid, {
+    origin: "https://portfolio.example",
+    "sec-fetch-site": "cross-site",
+  });
+  assert.equal(
+    (await handleContact(githubPagesRequest, resolver, "https://portfolio.example"))
+      .status,
+    201,
+  );
   assert.equal(
     (
       await handleContact(

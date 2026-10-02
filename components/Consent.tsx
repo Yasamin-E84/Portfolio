@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { copy, type Locale } from "@/lib/content";
+import { trackPortfolioEvent } from "@/lib/analytics-client";
 export function Consent({ locale }: { locale: Locale }) {
   const [choice, setChoice] = useState<string | null | undefined>(undefined),
     [open, setOpen] = useState(false),
@@ -34,13 +35,7 @@ export function Consent({ locale }: { locale: Locale }) {
       !/^\/(en|fa)(\/(works|about|privacy|terms|thank-you))?$/.test(pathname)
     )
       return;
-      const endpoint = process.env.NEXT_PUBLIC_STATIC_SITE === "1" && process.env.NEXT_PUBLIC_ADMIN_ORIGIN ? `${process.env.NEXT_PUBLIC_ADMIN_ORIGIN}/api/analytics` : "/api/analytics";
-      void fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ consent: true, locale, path: pathname }),
-      keepalive: true,
-    }).catch(() => {});
+    trackPortfolioEvent("page_view", pathname, locale);
   }, [choice, locale, pathname]);
   function choose(value: string) {
     try {

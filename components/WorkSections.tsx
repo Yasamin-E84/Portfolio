@@ -10,6 +10,7 @@ import {
 import { ThemeSwitch } from "./Header";
 import { usePortfolioContent } from "./PortfolioContent";
 import { resolvePortfolioUrl } from "@/lib/portfolio-config";
+import { trackPortfolioEvent } from "@/lib/analytics-client";
 export function DevelopmentWork({ locale }: { locale: Locale }) {
   const c = copy[locale];
   const managed = usePortfolioContent();
@@ -24,11 +25,12 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
     description: `${project.description[locale]}\n\n${pick(locale,"Role","نقش")}: ${project.role[locale]} · ${pick(locale,"Result","نتیجه")}: ${project.result[locale]}`,
     tags: project.tags,
     links: [
-      {
+      ...(project.repoUrl ? [{
         label: c.source,
         href: project.repoUrl,
-      },
+      }] : []),
       ...(project.liveUrl ? [{ label: c.demo, href: project.liveUrl }] : []),
+      ...(project.assetUrl ? [{ label: pick(locale,"Download project","دریافت پروژه"), href: project.assetUrl }] : []),
     ],
   }));
   return (
@@ -47,7 +49,7 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
             <button
               type="button"
               className="project-preview"
-              onClick={() => setActiveProject(index)}
+              onClick={() => {setActiveProject(index);trackPortfolioEvent("project_view",p.id,locale)}}
               aria-label={`${c.imageOpen}: ${p.name}`}
             >
               <span className="paper-tape" />
@@ -79,14 +81,14 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
                 {p.status[locale]}
               </p>
               <div className="project-links">
-                <a
+                {p.repoUrl && <a
                   className="text-link"
                   href={p.repoUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
                   {c.source} ↗
-                </a>
+                </a>}
                 {p.liveUrl && (
                   <a
                     className="text-link"
@@ -97,6 +99,7 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
                     {c.demo} ↗
                   </a>
                 )}
+                {p.assetUrl && <a className="text-link" href={p.assetUrl} target="_blank" rel="noreferrer">{pick(locale,"Download project","دریافت پروژه")} ↗</a>}
               </div>
             </div>
           </article>
@@ -106,7 +109,7 @@ export function DevelopmentWork({ locale }: { locale: Locale }) {
         <ProjectModal
           items={projectGallery}
           activeIndex={activeProject}
-          setActiveIndex={setActiveProject}
+          setActiveIndex={(index)=>{setActiveProject(index);trackPortfolioEvent("project_view",managedProjects[index]?.id||"unknown",locale)}}
           onClose={() => setActiveProject(null)}
           locale={locale}
         />
@@ -174,12 +177,12 @@ export function VisualWork({ locale }: { locale: Locale }) {
   const card = (item: (typeof works)[number], index: number, wide = false) => <Artwork
     key={item.id} file={item.id} src={resolvePortfolioUrl(item.imageUrl, process.env.NEXT_PUBLIC_BASE_PATH || "")}
     title={item.title[locale]} note={item.note[locale]} locale={locale} wide={wide}
-    onOpen={() => setActiveArtwork(index)} />;
+    onOpen={() => {setActiveArtwork(index);trackPortfolioEvent("artwork_view",item.id,locale)}} />;
   return <section className="visual-section section-shell" id="visual">
     <header className="section-heading"><p className="eyebrow">{c.visualEyebrow}</p><h2>{c.visualTitle}</h2><p>{c.visualIntro}</p></header>
     {works.length > 0 && <div className="art-layout">{card(works[0],0,true)}<div className="art-side"><div className="art-annotation"><span>✳</span><p className="hand-note">{pick(locale,"Different tools.\nThe same curiosity.","ابزارهای متفاوت؛\nهمان کنجکاوی.")}</p></div>{works.slice(1,3).map((item,index)=>card(item,index+1))}</div></div>}
     <div className="art-strip art-strip-more">{works.slice(3).map((item,index)=>card(item,index+3))}</div>
-    {activeArtwork !== null && <ProjectModal items={gallery} activeIndex={activeArtwork} setActiveIndex={setActiveArtwork} onClose={()=>setActiveArtwork(null)} locale={locale}/>}
+    {activeArtwork !== null && <ProjectModal items={gallery} activeIndex={activeArtwork} setActiveIndex={(index)=>{setActiveArtwork(index);trackPortfolioEvent("artwork_view",works[index]?.id||"unknown",locale)}} onClose={()=>setActiveArtwork(null)} locale={locale}/>}
   </section>;
 }
 export function MotionWork({ locale }: { locale: Locale }) {
@@ -190,8 +193,8 @@ export function MotionWork({ locale }: { locale: Locale }) {
   const gallery: GalleryItem[] = works.map((item) => ({ kind:"video", src:resolvePortfolioUrl(item.videoUrl, process.env.NEXT_PUBLIC_BASE_PATH || ""), poster:resolvePortfolioUrl(item.posterUrl, process.env.NEXT_PUBLIC_BASE_PATH || ""), title:item.title[locale], note:item.note[locale], portrait:item.portrait }));
   return <section className="motion-section" id="motion"><div className="section-shell">
     <header className="section-heading"><p className="eyebrow">{c.motionEyebrow}</p><h2>{c.motionTitle}</h2><p>{c.motionIntro}</p></header>
-    <div className="motion-grid">{works.map((item,index)=><Video key={item.id} file={item.id} poster={resolvePortfolioUrl(item.posterUrl, process.env.NEXT_PUBLIC_BASE_PATH || "")} title={item.title[locale]} note={item.note[locale]} locale={locale} portrait={item.portrait} onOpen={()=>setActiveMotion(index)}/>)}</div>
-    {activeMotion !== null && <ProjectModal items={gallery} activeIndex={activeMotion} setActiveIndex={setActiveMotion} onClose={()=>setActiveMotion(null)} locale={locale}/>}
+    <div className="motion-grid">{works.map((item,index)=><Video key={item.id} file={item.id} poster={resolvePortfolioUrl(item.posterUrl, process.env.NEXT_PUBLIC_BASE_PATH || "")} title={item.title[locale]} note={item.note[locale]} locale={locale} portrait={item.portrait} onOpen={()=>{setActiveMotion(index);trackPortfolioEvent("video_view",item.id,locale)}}/>)}</div>
+    {activeMotion !== null && <ProjectModal items={gallery} activeIndex={activeMotion} setActiveIndex={(index)=>{setActiveMotion(index);trackPortfolioEvent("video_view",works[index]?.id||"unknown",locale)}} onClose={()=>setActiveMotion(null)} locale={locale}/>}
     <p className="attribution-note">{pick(locale,"Personal learning studies. Featured brands retain their respective trademarks; these are not presented as commissioned campaigns.","تمرین‌های شخصی و آموزشی. نام‌ها و نشان‌های تجاری متعلق به صاحبانشان هستند؛ این آثار به‌عنوان کمپین سفارش‌داده‌شده معرفی نمی‌شوند.")}</p>
   </div></section>;
 }

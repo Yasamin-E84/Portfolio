@@ -80,12 +80,9 @@ export function assertSameOrigin(
   trustedOrigin = new URL(request.url).origin,
 ) {
   const origin = request.headers.get("origin");
-  if (
-    !origin ||
-    !trustedOrigin ||
-    origin !== trustedOrigin ||
-    request.headers.get("sec-fetch-site") === "cross-site"
-  ) {
+  // GitHub Pages calls the Worker across sites, so Sec-Fetch-Site is expected to
+  // be `cross-site`. The exact configured Origin remains the CSRF boundary.
+  if (!origin || !trustedOrigin || origin !== trustedOrigin) {
     throw new RequestProblem(403, "forbidden");
   }
 }
@@ -276,6 +273,9 @@ export const analyticsSchema = z
       "/en/thank-you",
       "/fa/thank-you",
     ]),
+    event: z.enum(["page_view", "project_view", "artwork_view", "video_view", "contact_click", "contact_copy"]).default("page_view"),
+    target: z.string().trim().max(120).default(""),
+    sessionId: z.string().uuid().optional(),
   })
   .strict()
   .refine((data) => data.path.startsWith(`/${data.locale}`), {
@@ -306,12 +306,12 @@ export async function handleAnalytics(
     if (!store)
       return jsonResponse({ success: false, code: "unavailable" }, 503);
     const now = Math.floor(Date.now() / 1000);
-    const counted = await store.recordView(
+    const counted = parsed.data.event === "page_view" ? await store.recordView(
       new Date(now * 1000).toISOString().slice(0, 10),
       parsed.data.path,
       parsed.data.locale,
       now,
-    );
+    ) : true;
     return counted
       ? new Response(null, {
           status: 204,

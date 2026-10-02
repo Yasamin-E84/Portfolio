@@ -13,6 +13,12 @@
       "migrations_dir": "drizzle",
     },
   ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "yasamin-portfolio-media"
+    }
+  ],
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://yasamin-e84.github.io/Portfolio"
   },

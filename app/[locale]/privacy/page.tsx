@@ -38,7 +38,7 @@ export default async function Privacy({
         </Link>
         <h1>{c.privacy}</h1>
         <p className="legal-date">
-          {pick(locale, "Updated 23 September 2026", "به‌روزرسانی: ۱ مهر ۱۴۰۵")}
+          {pick(locale, "Updated 2 October 2026", "به‌روزرسانی: ۱۰ مهر ۱۴۰۵")}
         </p>
         <p>
           {pick(
@@ -92,8 +92,8 @@ export default async function Privacy({
         <p>
           {pick(
             locale,
-            "Analytics stays off unless you choose “Allow analytics.” When enabled, the site increments a daily count for the page path and language. It does not assign visitor IDs or store names, referrers, IP addresses, or your contact message in analytics. Counts older than 365 days are removed on the next analytics event. Use “Cookie preferences” in the footer to change your choice at any time; choosing “Essential only” stops future page-view events.",
-            "آمارگیری تا انتخاب «اجازه آمارگیری» خاموش است. پس از اجازه، شمارنده روزانه مسیر صفحه و زبان افزایش می‌یابد. شناسه بازدیدکننده ساخته نمی‌شود و نام، ارجاع‌دهنده، IP یا متن پیام شما در آمار ذخیره نمی‌شود. شمارنده‌های قدیمی‌تر از ۳۶۵ روز در رخداد بعدی پاک می‌شوند. هر زمان می‌توانید از «تنظیمات کوکی» در پایین صفحه انتخابتان را تغییر دهید؛ «فقط موارد ضروری» ثبت بازدیدهای بعدی را متوقف می‌کند.",
+            "Analytics stays off unless you choose “Allow analytics.” When enabled, the site creates a random identifier for the current browser tab and records visited portfolio pages, opened projects or media, and clicks or use of the provided contact-copy buttons. Cloudflare supplies an approximate country, region and city. The network address is converted to a salted, non-reversible identifier used only for approximate unique counts; the raw IP address is not stored. Session and event details are retained for up to 90 days, while anonymous daily totals may remain for 365 days. Use “Cookie preferences” in the footer to change your choice; choosing “Essential only” stops future events.",
+            "آمارگیری تا انتخاب «اجازه آمارگیری» خاموش است. پس از اجازه، برای تب فعلی مرورگر یک شناسه تصادفی ساخته می‌شود و صفحه‌های دیده‌شده، پروژه‌ها یا رسانه‌های بازشده و کلیک یا استفاده از دکمه‌های کپی اطلاعات تماس ثبت می‌شود. Cloudflare کشور، استان و شهر تقریبی را فراهم می‌کند. آدرس شبکه فقط به یک شناسه نمک‌دار و غیرقابل‌بازگشت برای شمارش تقریبی تبدیل می‌شود و IP خام ذخیره نمی‌شود. جزئیات نشست و رخدادها حداکثر ۹۰ روز و شمارنده‌های روزانه ناشناس تا ۳۶۵ روز نگهداری می‌شوند. از «تنظیمات کوکی» می‌توانید انتخاب را تغییر دهید؛ «فقط موارد ضروری» ثبت رخدادهای بعدی را متوقف می‌کند.",
           )}
         </p>
         <h2>
