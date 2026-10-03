@@ -9,11 +9,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public final class AlertService extends Service {
-    private volatile boolean running;private ExecutorService executor;
-    static void start(Context context){Intent intent=new Intent(context,AlertService.class);if(Build.VERSION.SDK_INT>=26)context.startForegroundService(intent);else context.startService(intent);}
+    private static final long MAX_LIVE_SESSION_MS=4L*60L*60L*1000L;
+    private volatile boolean running,foregroundReady;private ExecutorService executor;
+    static boolean start(Context context){SecretStore store=new SecretStore(context);if(store.token()==null||!store.live())return false;try{Intent intent=new Intent(context,AlertService.class);if(Build.VERSION.SDK_INT>=26)context.startForegroundService(intent);else context.startService(intent);return true;}catch(RuntimeException error){store.live(false);return false;}}
     static void stop(Context context){new SecretStore(context).live(false);context.stopService(new Intent(context,AlertService.class));}
-    @Override public void onCreate(){super.onCreate();startForeground(41,NotificationHelper.live(this));executor=Executors.newSingleThreadExecutor();}
-    @Override public int onStartCommand(Intent intent,int flags,int startId){if(running)return START_STICKY;running=true;new SecretStore(this).live(true);executor.execute(()->{while(running){sync(this);try{Thread.sleep(30_000);}catch(InterruptedException ignored){Thread.currentThread().interrupt();break;}}});return START_STICKY;}
+    @Override public void onCreate(){super.onCreate();executor=Executors.newSingleThreadExecutor();try{startForeground(41,NotificationHelper.live(this));foregroundReady=true;}catch(RuntimeException error){new SecretStore(this).live(false);stopSelf();}}
+    @Override public int onStartCommand(Intent intent,int flags,int startId){SecretStore store=new SecretStore(this);if(!foregroundReady||store.token()==null||!store.live()){stopSelf();return START_NOT_STICKY;}if(running)return START_NOT_STICKY;running=true;executor.execute(()->{long deadline=System.currentTimeMillis()+MAX_LIVE_SESSION_MS;try{while(running&&System.currentTimeMillis()<deadline){sync(this);Thread.sleep(30_000);}}catch(InterruptedException ignored){Thread.currentThread().interrupt();}finally{running=false;store.live(false);stopSelf();}});return START_NOT_STICKY;}
+    public void onTimeout(int startId,int foregroundServiceType){stopSafely();}
+    private void stopSafely(){running=false;new SecretStore(this).live(false);stopForeground(STOP_FOREGROUND_REMOVE);stopSelf();}
     static boolean sync(Context context){SecretStore store=new SecretStore(context);String token=store.token();if(token==null)return false;try{ApiClient.Poll poll=ApiClient.poll(token,store.cursor());for(ApiClient.Item item:poll.items)NotificationHelper.show(context,item);store.cursor(poll.serverTime);return true;}catch(ApiClient.ApiException error){if(error.status==401){store.clear();context.stopService(new Intent(context,AlertService.class));}return false;}catch(Exception error){return false;}}
     @Override public void onDestroy(){running=false;if(executor!=null)executor.shutdownNow();super.onDestroy();}
     @Override public IBinder onBind(Intent intent){return null;}
