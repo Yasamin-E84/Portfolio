@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 final class SecretStore {
     private static final String PREFS="portfolio_alerts";
-    private static final int STORAGE_VERSION=3;
+    private static final int STORAGE_VERSION=4;
     private final SharedPreferences prefs;
     SecretStore(Context context){prefs=context.getSharedPreferences(PREFS,Context.MODE_PRIVATE);}
     boolean migrate(){int current=prefs.getInt("storage_version",1);if(current>=STORAGE_VERSION)return false;prefs.edit().remove("token").remove("iv").putInt("storage_version",STORAGE_VERSION).putBoolean("live",false).apply();return true;}
