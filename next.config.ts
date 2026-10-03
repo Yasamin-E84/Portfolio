@@ -1,18 +1,19 @@
 import type { NextConfig } from "next";
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const isStaticExport =
+  isGitHubPages || process.env.STATIC_EXPORT === "true";
 const basePath = isGitHubPages ? "/Portfolio" : "";
 const config: NextConfig = {
   poweredByHeader: false,
-  ...(isGitHubPages
+  ...(isStaticExport
     ? {
         output: "export" as const,
-        basePath,
-        assetPrefix: basePath,
+        ...(basePath ? { basePath, assetPrefix: basePath } : {}),
         trailingSlash: true,
       }
     : {}),
   images: { unoptimized: true },
-  ...(!isGitHubPages
+  ...(!isStaticExport
     ? {
         async headers() {
           return [

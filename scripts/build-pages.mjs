@@ -10,6 +10,12 @@ import {
 import path from "node:path";
 
 const root = process.cwd();
+const isRootExport =
+  process.env.STATIC_ROOT_EXPORT === "true" || process.argv.includes("--root");
+const exportBasePath = isRootExport ? "" : "/Portfolio";
+const exportSiteUrl = isRootExport
+  ? process.env.STATIC_SITE_URL || "https://yasamin-soraghi.pages.dev"
+  : "https://yasamin-e84.github.io/Portfolio";
 const backupRoot = path.join(root, ".pages-build-backup");
 const disabled = [
   [path.join(root, "app", "api"), path.join(backupRoot, "api")],
@@ -73,9 +79,10 @@ try {
   await rm(path.join(root, ".next"), { recursive: true, force: true });
   await run("npm", ["run", "build"], {
     ...process.env,
-    GITHUB_PAGES: "true",
-    NEXT_PUBLIC_BASE_PATH: "/Portfolio",
-    NEXT_PUBLIC_SITE_URL: "https://yasamin-e84.github.io/Portfolio",
+    GITHUB_PAGES: isRootExport ? "false" : "true",
+    STATIC_EXPORT: "true",
+    NEXT_PUBLIC_BASE_PATH: exportBasePath,
+    NEXT_PUBLIC_SITE_URL: exportSiteUrl,
     NEXT_PUBLIC_STATIC_SITE: "1",
     NEXT_PUBLIC_CONTENT_API: "https://yasamin-portfolio.pwvzvxulmp0yw4u-ov3ihdw92l2.workers.dev/api/content",
     NEXT_PUBLIC_ADMIN_ORIGIN: "https://yasamin-portfolio.pwvzvxulmp0yw4u-ov3ihdw92l2.workers.dev",
@@ -93,13 +100,15 @@ try {
   for (const file of await walk(outputRoot)) {
     if (!textExtensions.has(path.extname(file))) continue;
     const input = await readFile(file, "utf8");
-    const output = input
-      .replaceAll('url("/media/', 'url("/Portfolio/media/')
-      .replaceAll("url('/media/", "url('/Portfolio/media/")
-      .replaceAll("url(/media/", "url(/Portfolio/media/")
-      .replaceAll('url("/fonts/', 'url("/Portfolio/fonts/')
-      .replaceAll("url('/fonts/", "url('/Portfolio/fonts/")
-      .replaceAll("url(/fonts/", "url(/Portfolio/fonts/");
+    const output = exportBasePath
+      ? input
+          .replaceAll('url("/media/', `url("${exportBasePath}/media/`)
+          .replaceAll("url('/media/", `url('${exportBasePath}/media/`)
+          .replaceAll("url(/media/", `url(${exportBasePath}/media/`)
+          .replaceAll('url("/fonts/', `url("${exportBasePath}/fonts/`)
+          .replaceAll("url('/fonts/", `url('${exportBasePath}/fonts/`)
+          .replaceAll("url(/fonts/", `url(${exportBasePath}/fonts/`)
+      : input;
     if (output !== input) await writeFile(file, output);
   }
   await writeFile(path.join(outputRoot, ".nojekyll"), "");
