@@ -17,7 +17,7 @@ import {
   type SqlDatabase,
   type SqlStatement,
 } from "../lib/db";
-import { hashMobileToken, newMobileToken } from "../lib/mobile-auth";
+import { hashMobileToken, newMobileToken, secureTokenEqual } from "../lib/mobile-auth";
 
 const valid = {
   name: "Test Visitor",
@@ -365,6 +365,9 @@ test("mobile alert tokens are high-entropy, URL-safe and stored only as hashes",
   assert.match(hash, /^[A-Za-z0-9_-]{43}$/);
   assert.notEqual(hash, first);
   assert.equal(await hashMobileToken(first), hash);
+  assert.equal(await secureTokenEqual(first, first), true);
+  assert.equal(await secureTokenEqual(first, second), false);
+  assert.equal(await secureTokenEqual("", first), false);
 });
 
 test("analytics aggregates one bounded row per daily page and limits bursts without visitor identifiers", async () => {
