@@ -16,7 +16,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = 34)
+@Config(sdk = {34, 35})
 public final class MainActivityTest {
     @Test public void opensAgainWithoutLoginOrStoredSession() {
         ActivityController<MainActivity> first=launch();
