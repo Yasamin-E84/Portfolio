@@ -9,5 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/api/", "/login", "/admin", "/en/thank-you", "/fa/thank-you"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }

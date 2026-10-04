@@ -4,8 +4,8 @@ import { DocumentLocale } from "@/components/DocumentLocale";
 import { PageTurnTransition } from "@/components/PageTurnTransition";
 import { PortfolioContentProvider } from "@/components/PortfolioContent";
 import { isLocale } from "@/lib/content";
-
-export const dynamicParams = false;
+import { siteUrl } from "@/lib/content";
+import { websiteGraph } from "@/seo-engine/entity";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fa" }];
@@ -20,6 +20,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  const graph = websiteGraph(siteUrl, locale);
   return (
     <div
       lang={locale}
@@ -27,6 +28,7 @@ export default async function LocaleLayout({
       data-locale={locale}
       className="locale-root"
     >
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replaceAll("<", "\\u003c") }} />
       <DocumentLocale locale={locale} />
       <PageTurnTransition />
       <PortfolioContentProvider locale={locale}>{children}</PortfolioContentProvider>

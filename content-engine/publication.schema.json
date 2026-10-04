@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Yasamin publication draft",
+  "type": "object",
+  "required": ["id","type","slug","title","shortDescription","answer","content","examples","expertOpinion","coverImage","category","tags","publishDate","scheduledFor","featured","seoTitle","seoDescription","socialCaption","schemaData","author","readingTime","status","faq","sources","createdAt","updatedAt"],
+  "properties": {
+    "id": {"type":"string"}, "type":{"enum":["article","signature-update"]}, "slug":{"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "title":{"$ref":"#/$defs/bi"}, "shortDescription":{"$ref":"#/$defs/bi"}, "answer":{"$ref":"#/$defs/bi"}, "content":{"$ref":"#/$defs/bi"}, "examples":{"$ref":"#/$defs/bi"}, "expertOpinion":{"$ref":"#/$defs/bi"},
+    "coverImage":{"type":"string"}, "category":{"enum":["AI","Frontend","Backend","Security","Tools","Industry","Career","Projects"]}, "tags":{"type":"array","items":{"type":"string"},"maxItems":15},
+    "publishDate":{"type":"string"}, "scheduledFor":{"type":"string"}, "featured":{"type":"boolean"}, "seoTitle":{"$ref":"#/$defs/bi"}, "seoDescription":{"$ref":"#/$defs/bi"}, "socialCaption":{"$ref":"#/$defs/bi"}, "schemaData":{"type":"object"}, "author":{"type":"string"}, "readingTime":{"type":"integer","minimum":1}, "status":{"enum":["draft","scheduled","published"]},
+    "faq":{"type":"array","items":{"type":"object","required":["question","answer"],"properties":{"question":{"$ref":"#/$defs/bi"},"answer":{"$ref":"#/$defs/bi"}}}},
+    "sources":{"type":"array","items":{"type":"object","required":["title","url"],"properties":{"title":{"type":"string"},"url":{"type":"string","format":"uri"}}}}, "createdAt":{"type":"integer"}, "updatedAt":{"type":"integer"}
+  },
+  "$defs":{"bi":{"type":"object","required":["en","fa"],"properties":{"en":{"type":"string"},"fa":{"type":"string"}}}}
+}

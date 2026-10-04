@@ -1,12 +1,15 @@
 "use client";
 import { useEffect,useMemo,useState } from "react";
 import { defaultPortfolioConfig,portfolioConfigSchema,type PortfolioConfig } from "@/lib/portfolio-config";
+import { PublicationManager } from "@/admin-components/PublicationManager";
+import { PublicationOverview } from "@/admin-components/PublicationOverview";
+import { AutomationPanel } from "@/admin-components/AutomationPanel";
 
-type Tab="overview"|"profile"|"projects"|"artwork"|"motion"|"seo"|"inbox";
+type Tab="overview"|"articles"|"updates"|"automation"|"profile"|"projects"|"artwork"|"motion"|"seo"|"inbox";
 type Insights={messages:{id:number;name:string;email:string;message:string;locale:string;createdAt:number}[];analytics:{day:string;path:string;locale:string;views:number}[];sessions:{sessionId:string;country:string;region:string;city:string;firstSeen:number;lastSeen:number;pageViews:number;eventCount:number}[];events:{sessionId:string;eventType:string;path:string;target:string;locale:string;createdAt:number}[];uniqueVisitors:number};
 const clone=()=>structuredClone(defaultPortfolioConfig);
 const uid=()=>crypto.randomUUID().slice(0,8);
-const tabs:Tab[]=["overview","profile","projects","artwork","motion","seo","inbox"];
+const tabs:Tab[]=["overview","articles","updates","automation","profile","projects","artwork","motion","seo","inbox"];
 
 export function AdminDashboard(){
   const [content,setContent]=useState<PortfolioConfig>(clone); const [tab,setTab]=useState<Tab>("overview");
@@ -45,10 +48,13 @@ export function AdminDashboard(){
       <button className="admin-logout" onClick={logout}>Sign out</button>
     </aside>
     <section className="admin-workspace">
-      <header className="admin-toolbar"><div><strong>{tab}</strong><span>{status}</span></div><button className="button button-dark" onClick={save} disabled={saving}>{saving?"Publishing…":"Publish changes"}</button></header>
-      {tab==="overview"&&<section className="admin-panel"><h2>Hiring strength</h2><div className="hire-score"><strong>{score}</strong><span>/100</span><i style={{width:`${score}%`}} /></div><div className="admin-checks">
+      <header className="admin-toolbar"><div><strong>{tab}</strong><span>{status}</span></div>{!["articles","updates","automation","inbox"].includes(tab)&&<button className="button button-dark" onClick={save} disabled={saving}>{saving?"Publishing…":"Publish portfolio changes"}</button>}</header>
+      {tab==="overview"&&<section className="admin-panel"><PublicationOverview/><h2>Hiring strength</h2><div className="hire-score"><strong>{score}</strong><span>/100</span><i style={{width:`${score}%`}} /></div><div className="admin-checks">
         <p className={content.settings.openToWork?"done":""}>State that you are open to work</p><p className={content.projects.length>=3?"done":""}>Show at least three substantial projects</p><p className={content.projects.some(x=>x.result.en)?"done":""}>Explain outcomes, not only tools</p><p className={content.profile.resumeUrl?"done":""}>Keep a downloadable résumé</p><p className={content.settings.linkedinUrl?"done":""}>Add LinkedIn for recruiter verification</p>
       </div><div className="admin-note"><h3>What improves hiring chances</h3><p>Lead each case study with your role, the problem, what you built and the result. Keep only your strongest work visible. Use the availability line for the exact roles you want.</p></div></section>}
+      {tab==="articles"&&<PublicationManager type="article"/>}
+      {tab==="updates"&&<PublicationManager type="signature-update"/>}
+      {tab==="automation"&&<AutomationPanel/>}
       {tab==="profile"&&<section className="admin-panel"><h2>Profile and hiring message</h2><div className="admin-form-grid">
         <Bi label="Name" value={content.profile.name} onChange={v=>update("profile",{...content.profile,name:v})}/><Bi label="Role" value={content.profile.role} onChange={v=>update("profile",{...content.profile,role:v})}/><Bi label="Headline" value={content.profile.headline} onChange={v=>update("profile",{...content.profile,headline:v})}/><Bi label="Handwritten line" value={content.profile.headlineAccent} onChange={v=>update("profile",{...content.profile,headlineAccent:v})}/><Bi label="Introduction" area value={content.profile.intro} onChange={v=>update("profile",{...content.profile,intro:v})}/><Bi label="Availability" area value={content.profile.availability} onChange={v=>update("profile",{...content.profile,availability:v})}/>
         <Field label="Email" value={content.profile.email} onChange={v=>update("profile",{...content.profile,email:v})}/><UploadField label="Résumé" value={content.profile.resumeUrl} kind="file" accept=".pdf,.zip" onChange={v=>update("profile",{...content.profile,resumeUrl:v})}/><UploadField label="Portrait" value={content.profile.portraitUrl} kind="image" accept="image/*" onChange={v=>update("profile",{...content.profile,portraitUrl:v})}/>

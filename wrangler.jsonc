@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "yasamin-portfolio",
   "main": ".open-next/worker.js",
-  "compatibility_date": "2026-10-01",
+  "compatibility_date": "2026-09-28",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "d1_databases": [
@@ -13,14 +13,8 @@
       "migrations_dir": "drizzle",
     },
   ],
-  "r2_buckets": [
-    {
-      "binding": "MEDIA",
-      "bucket_name": "yasamin-portfolio-media"
-    }
-  ],
   "vars": {
-    "NEXT_PUBLIC_SITE_URL": "https://yasamin-e84.github.io/Portfolio"
+    "NEXT_PUBLIC_SITE_URL": "https://yasamin-soraghi.yasaminsoraghi84.chatgpt.site"
   },
   "observability": { "enabled": true, "traces": { "enabled": true } },
 }

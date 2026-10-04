@@ -75,8 +75,14 @@ export function Home({ locale }: { locale: Locale }) {
             </p>
             <span aria-hidden="true">↗</span>
           </Link>
-          <Link className="directory-note" href={`/${locale}/about`}>
+          <Link className="directory-note" href={`/${locale}/journal`}>
             <span className="hand-note">02</span>
+            <h2>{pick(locale, "Technology field notes", "دفتر فناوری")}</h2>
+            <p>{pick(locale, "Frontend guides, project case studies and selected technology updates, written answer-first.", "راهنماهای فرانت‌اند، مطالعه‌های موردی و خبرهای منتخب فناوری با پاسخ روشن در ابتدای مطلب.")}</p>
+            <span aria-hidden="true">↗</span>
+          </Link>
+          <Link className="directory-note" href={`/${locale}/about`}>
+            <span className="hand-note">03</span>
             <h2>{c.nav[2]}</h2>
             <p>
               {pick(

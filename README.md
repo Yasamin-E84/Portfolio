@@ -1,25 +1,53 @@
-# Yasamin Soraghi — Portfolio
+# Yasamin Soraghi — Portfolio & Technology Field Notes
 
-My personal portfolio brings web development, illustration, motion graphics and video editing together in an interactive solar system and a paper notebook.
+A bilingual developer portfolio, independent technology publication and client inquiry platform. Yasamin's interactive solar system and hand-drawn notebook now lead into frontend case studies, practical guides, carefully sourced technology notes and personal Signature Updates.
 
-Explore seven subjects through the planets, browse the filtered Works page, or visit About Me. The interface supports English and Persian, right-to-left layouts, light and dark themes, keyboard navigation and reduced motion.
+![Yasamin Soraghi portfolio preview](public/og.png)
 
-[More samples on GitHub](https://github.com/Yasamin-E84)
+**Live:** [Cloudflare site](https://yasamin-soraghi.pages.dev/) · [GitHub Pages mirror](https://yasamin-e84.github.io/Portfolio/) · [More work on GitHub](https://github.com/Yasamin-E84)
+
+## Product features
+
+- English and Persian routes with first-class RTL layouts
+- Interactive Three.js portfolio, filtered work archive and responsive project mockups
+- Technology journal with answer-first articles, sources and FAQs
+- Signature Updates for launches, milestones and open-source releases
+- Private dark-mode CMS with drafts, publishing, scheduling, featured content and uploads
+- SEO metadata, canonical URLs, language alternates, RSS, sitemap and robots policies
+- Website, Person, Organization, Article, Breadcrumb and FAQ JSON-LD
+- Draft-only Activepieces webhook with a human editorial approval gate
+- Privacy-aware visitor and project interaction insights
+- Accessible navigation, reduced-motion support, optimized local fonts and lazy media
+
+## Architecture
+
+| Layer | Responsibility |
+| --- | --- |
+| `content-engine/` | Publication model, validation, fallback content and D1 reads |
+| `seo-engine/` | Entity consistency and JSON-LD graphs |
+| `admin-components/` | Editorial management and operational dashboard |
+| `automation/` | Source registry and Activepieces workflow recipe |
+| `ai-prompts/` | Versioned quality and generation rules |
+| `app/` | Next.js pages, metadata routes and protected APIs |
+| `drizzle/` | Cloudflare D1 migrations |
+
+The Cloudflare Worker hosts the complete dynamic application and CMS. Cloudflare Pages and GitHub Pages receive static exports with curated public content. See [architecture](docs/ARCHITECTURE.md).
 
 ## Stack
 
-Next.js App Router, React, TypeScript, Tailwind CSS and Three.js. A small server-side contact endpoint uses Zod validation and a private SQLite database through Cloudflare D1. Optional analytics record aggregate page counts only after consent.
+Next.js 16 App Router, React 19, TypeScript, Tailwind CSS, Three.js, Zod, Cloudflare Workers, D1 and R2 through OpenNext.
 
-## Development
+## Local development
 
 Use Node.js 22 or newer.
 
 ```sh
 npm ci
+copy .env.example .env.local
 npm run dev
 ```
 
-Open `http://localhost:3000/en` or `/fa`. Copy `.env.example` to an ignored local environment file when configuring the site origin. Never commit secrets.
+Open `http://localhost:3000/en` or `/fa`. The app falls back to checked-in publication content when no Worker binding is present.
 
 ```sh
 npm run typecheck
@@ -28,7 +56,9 @@ npm test
 npm run build
 ```
 
-## Worker runtime
+## Cloudflare Worker
+
+Create an ignored `.dev.vars` with the required secrets, then:
 
 ```sh
 npm run build:worker
@@ -36,14 +66,18 @@ npx wrangler d1 migrations apply DB --local
 npx wrangler dev --port 8787
 ```
 
-For local Worker testing, create an ignored `.dev.vars` file with `NEXT_PUBLIC_SITE_URL=http://127.0.0.1:8787` and a random `CONTACT_RATE_SALT` of at least 32 characters. The database binding is named `DB`; the checked-in database identifier is for local development only.
+Production requires `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`, `CONTACT_RATE_SALT` and `AUTOMATION_WEBHOOK_SECRET` as Worker secrets. Apply migrations before deploying. Never commit these values.
 
-Production needs a Cloudflare-compatible Worker host, its own D1 database, the migrations in `drizzle/`, a private rate-limit secret and the exact HTTPS origin in `NEXT_PUBLIC_SITE_URL`. Set the site origin at build time for metadata and at runtime for request validation. This application includes server routes and requires a server runtime.
+## Content operations
 
-The contact form reports success only after saving a message. It does not promise email delivery. The privacy page describes storage, retention and optional analytics.
+- [Editorial guide: articles and Signature Updates](docs/EDITORIAL_GUIDE.md)
+- [Activepieces automation setup and client reuse](docs/CONTENT_AUTOMATION.md)
+- [System architecture](docs/ARCHITECTURE.md)
+- [Contribution rules](CONTRIBUTING.md)
+- [Release history](CHANGELOG.md)
 
-## Artwork and fonts
+The automation system cannot publish. It accepts validated drafts, forces draft status, and leaves review, scheduling and publication to Yasamin in the admin.
 
-The portfolio includes Yasamin’s selected creative studies and educational brand reconstructions. Brand names and trademarks belong to their respective owners. Creative samples are presented for viewing; inclusion in this repository does not grant redistribution rights.
+## Creative work and licenses
 
-Vazirmatn and Caveat are self-hosted under the SIL Open Font License. Their license notices are included in `public/fonts/`.
+The visual work is Yasamin's selected educational and personal portfolio material. Brand names and trademarks belong to their owners. Inclusion in this repository does not grant redistribution rights. Self-hosted fonts retain their license notices under `public/fonts/`.

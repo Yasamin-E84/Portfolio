@@ -26,6 +26,11 @@ export const metadata: Metadata = {
     ],
   },
   twitter: { card: "summary_large_image", images: ["/og.png"] },
+  alternates: { types: { "application/rss+xml": "/feed.xml" } },
+  keywords: ["Yasamin Soraghi", "Frontend Developer", "React", "Next.js", "TypeScript", "AI", "Technology"],
+  authors: [{ name: "Yasamin Soraghi", url: siteUrl }],
+  creator: "Yasamin Soraghi",
+  publisher: "Yasamin Soraghi",
 };
 export const viewport: Viewport = {
   width: "device-width",

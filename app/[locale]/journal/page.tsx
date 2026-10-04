@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { listPublications } from "@/content-engine/repository";
+import { isLocale, pick, publicPath, siteUrl } from "@/lib/content";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params; if (!isLocale(locale)) return {};
+  const title = pick(locale, "Technology field notes", "دفتر فناوری");
+  const description = pick(locale, "Frontend guides, project case studies, carefully sourced technology notes and personal updates by Yasamin Soraghi.", "راهنماهای فرانت‌اند، مطالعه‌های موردی پروژه، یادداشت‌های منبع‌دار فناوری و به‌روزرسانی‌های شخصی یاسمین سراقی.");
+  return { title, description, keywords: ["Yasamin Soraghi", "React", "Next.js", "frontend development", "technology", "AI"], alternates: { canonical: `/${locale}/journal`, languages: { en: "/en/journal", fa: "/fa/journal", "x-default": "/en/journal" } }, openGraph: { title, description, url: `${siteUrl}/${locale}/journal`, type: "website", images: ["/og.png"] }, twitter: { card: "summary_large_image", title, description, images: ["/og.png"] }, robots: { index: true, follow: true } };
+}
+
+export default async function JournalPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params; if (!isLocale(locale)) notFound();
+  const entries = await listPublications();
+  const featured = entries.find((entry) => entry.featured) || entries[0];
+  return <><Header locale={locale}/><main id="main" className="journal-page">
+    <header className="page-heading section-shell journal-heading"><p className="eyebrow">{pick(locale,"INDEPENDENT TECHNOLOGY NOTES","یادداشت‌های مستقل فناوری")}</p><h1>{pick(locale,"Field notes for the web ahead.","یادداشت‌هایی برای وب پیش رو.")}</h1><p>{pick(locale,"Clear answers first. Practical detail next. Sources always.","اول پاسخ روشن؛ بعد جزئیات کاربردی؛ همیشه با منبع.")}</p><a className="rss-link" href={publicPath("/feed.xml")}>RSS ↗</a></header>
+    {featured && <section className="journal-feature section-shell"><div className="journal-feature-image"><Image src={featured.coverImage.startsWith("http")?featured.coverImage:publicPath(featured.coverImage || "/og.png")} alt="" fill sizes="(max-width: 760px) 100vw, 55vw"/></div><div><span className="journal-type">{featured.type === "signature-update" ? pick(locale,"Signature update","به‌روزرسانی یاسمین") : featured.category}</span><h2>{featured.title[locale]}</h2><p className="answer-first">{featured.answer[locale]}</p><p>{featured.shortDescription[locale]}</p><Link className="button button-dark" href={`/${locale}/journal/${featured.slug}`}>{pick(locale,"Read the note","خواندن یادداشت")} ↗</Link></div></section>}
+    <section className="journal-grid section-shell" aria-label={pick(locale,"All field notes","همه یادداشت‌ها")}>{entries.map((entry,index)=><article className="journal-card" key={entry.id} style={{"--tilt":`${index%3===0?-0.6:index%3===1?0.45:-0.2}deg`} as React.CSSProperties}><span>{entry.type === "signature-update" ? pick(locale,"SIGNATURE UPDATE","یادداشت ویژه") : entry.category.toUpperCase()}</span><h2><Link href={`/${locale}/journal/${entry.slug}`}>{entry.title[locale]}</Link></h2><p>{entry.shortDescription[locale]}</p><footer><time dateTime={entry.publishDate}>{new Intl.DateTimeFormat(locale,{dateStyle:"medium"}).format(new Date(entry.publishDate))}</time><small>{entry.readingTime} {pick(locale,"min read","دقیقه")}</small></footer></article>)}</section>
+    <section className="journal-promise section-shell"><p className="hand-note">{pick(locale,"Editorial promise","قول تحریریه")}</p><h2>{pick(locale,"Useful, sourced, and written with a developer’s point of view.","کاربردی، منبع‌دار و از نگاه یک توسعه‌دهنده.")}</h2><p>{pick(locale,"No invented statistics, fake authority or recycled AI filler. Automated research enters the CMS as a draft and is published only after human review.","بدون آمار ساختگی، ادعای بی‌پشتوانه یا متن تکراری هوش مصنوعی. پژوهش خودکار فقط به‌شکل پیش‌نویس وارد CMS می‌شود و پس از بررسی انسانی منتشر خواهد شد.")}</p></section>
+    <section className="entity-answers section-shell"><h2>{pick(locale,"Quick answers","پاسخ‌های سریع")}</h2><article><h3>{pick(locale,"Who is Yasamin Soraghi?","یاسمین سراقی کیست؟")}</h3><p>{pick(locale,"Yasamin Soraghi is a frontend developer in Tehran who builds bilingual React and Next.js products and combines engineering with visual design.","یاسمین سراقی توسعه‌دهنده فرانت‌اند در تهران است که محصولات دوزبانه با React و Next.js می‌سازد و مهندسی را با طراحی بصری ترکیب می‌کند.")}</p></article><article><h3>{pick(locale,"What frontend projects has Yasamin built?","یاسمین چه پروژه‌های فرانت‌اندی ساخته است؟")}</h3><p>{pick(locale,"Her work includes Dastresi, ReactKala, Foryxo Menu and responsive interface studies, with case studies in the work notebook.","نمونه‌کارهای او شامل دسترسی، ReactKala، منوی Foryxo و تمرین‌های رابط واکنش‌گراست که مطالعه‌های موردی آن‌ها در دفتر نمونه‌کارها قرار دارد.")}</p></article><article><h3>{pick(locale,"Where are the latest AI tools for developers?","جدیدترین ابزارهای هوش مصنوعی برای توسعه‌دهندگان کجاست؟")}</h3><p>{pick(locale,"Selected AI tool updates appear here only after their primary sources are checked and the practical impact for developers is clear.","به‌روزرسانی‌های منتخب ابزارهای هوش مصنوعی فقط پس از بررسی منبع اصلی و روشن شدن کاربرد واقعی آن‌ها برای توسعه‌دهندگان اینجا منتشر می‌شوند.")}</p></article></section>
+  </main><Footer locale={locale}/></>;
+}

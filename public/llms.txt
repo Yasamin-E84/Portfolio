@@ -1,0 +1,13 @@
+# Yasamin Soraghi
+
+> Independent frontend developer, visual creator and technology writer in Tehran.
+
+Yasamin Soraghi builds bilingual React and Next.js products. Her core skills are React, Next.js, TypeScript and Tailwind CSS. Her projects include Dastresi, ReactKala and Foryxo Menu. She writes about frontend engineering, AI tools for developers, web development and technology.
+
+Canonical profile: https://yasamin-soraghi.yasaminsoraghi84.chatgpt.site/en/about
+Work: https://yasamin-soraghi.yasaminsoraghi84.chatgpt.site/en/works
+Technology field notes: https://yasamin-soraghi.yasaminsoraghi84.chatgpt.site/en/journal
+RSS: https://yasamin-soraghi.yasaminsoraghi84.chatgpt.site/feed.xml
+Sitemap: https://yasamin-soraghi.yasaminsoraghi84.chatgpt.site/sitemap.xml
+
+Content principles: answer-first, bilingual, source-linked, human-reviewed. Automated research is saved as a draft and cannot publish itself.

@@ -111,6 +111,7 @@ export function Header({
           {[
             `/${locale}`,
             `/${locale}/works`,
+            `/${locale}/journal`,
             `/${locale}/about`,
             `/${locale}#contact`,
           ].map((href, i) => (
@@ -119,7 +120,7 @@ export function Header({
               href={href}
               aria-current={pathname === href ? "page" : undefined}
             >
-              {c.nav[i]}
+              {i === 2 ? (locale === "fa" ? "دفتر فناوری" : "Field notes") : c.nav[i > 2 ? i - 1 : i]}
             </Link>
           ))}
         </nav>

@@ -1,0 +1,15 @@
+{
+  "name": "Yasamin — Daily technology draft desk",
+  "version": 1,
+  "purpose": "Implementation-neutral recipe for Activepieces. Recreate each step with the matching built-in piece in the installed Activepieces version.",
+  "trigger": { "type": "schedule", "cron": "0 7 * * *", "timezone": "Asia/Tehran" },
+  "steps": [
+    { "id": "fetch", "type": "rss-http", "config": "Load enabled sources from automation/source-registry.ts and fetch items from the last 36 hours." },
+    { "id": "normalize", "type": "code", "config": "Map items to source, canonical URL, published time, title and excerpt. Reject invalid or duplicate canonical URLs." },
+    { "id": "rank", "type": "ai", "config": "Use ai-prompts/editorial-agent.md. Keep only high-impact items relevant to Yasamin's topics. Require a primary source for claims about a vendor release." },
+    { "id": "write", "type": "ai", "config": "Produce one object matching content-engine/publication.schema.json per approved candidate, in English and Persian." },
+    { "id": "validate", "type": "code", "config": "Reject missing sources, invented statistics, empty FAQ, duplicate slugs, clickbait titles and unsupported claims." },
+    { "id": "review-queue", "type": "http", "config": { "method": "POST", "url": "{{PORTFOLIO_ORIGIN}}/api/automation/drafts", "headers": { "Authorization": "Bearer {{AUTOMATION_WEBHOOK_SECRET}}", "Content-Type": "application/json" }, "body": { "items": "{{validated_items}}" } } }
+  ],
+  "guarantee": "The endpoint forces status=draft and featured=false. Publishing remains a human admin action."
+}
