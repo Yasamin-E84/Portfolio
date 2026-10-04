@@ -6,4 +6,5 @@ Disallow: /admin
 Disallow: /en/thank-you
 Disallow: /fa/thank-you
 
+Host: https://yasamin-e84.github.io/Portfolio
 Sitemap: https://yasamin-e84.github.io/Portfolio/sitemap.xml

@@ -15,6 +15,13 @@
 <priority>0.3</priority>
 </url>
 <url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/journal</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/journal" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/journal" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
 <loc>https://yasamin-e84.github.io/Portfolio/en/about</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/about" />
 <xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/about" />
@@ -50,6 +57,13 @@
 <priority>0.3</priority>
 </url>
 <url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/journal</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/journal" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/journal" />
+<changefreq>monthly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
 <loc>https://yasamin-e84.github.io/Portfolio/fa/about</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/about" />
 <xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/about" />
@@ -69,5 +83,37 @@
 <xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/terms" />
 <changefreq>monthly</changefreq>
 <priority>0.3</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/journal/welcome-to-the-field-notes</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/journal/welcome-to-the-field-notes" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/journal/welcome-to-the-field-notes" />
+<lastmod>2026-10-03T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/en/journal/react-performance-principles</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/journal/react-performance-principles" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/journal/react-performance-principles" />
+<lastmod>2026-10-03T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/journal/welcome-to-the-field-notes</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/journal/welcome-to-the-field-notes" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/journal/welcome-to-the-field-notes" />
+<lastmod>2026-10-03T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://yasamin-e84.github.io/Portfolio/fa/journal/react-performance-principles</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://yasamin-e84.github.io/Portfolio/en/journal/react-performance-principles" />
+<xhtml:link rel="alternate" hreflang="fa" href="https://yasamin-e84.github.io/Portfolio/fa/journal/react-performance-principles" />
+<lastmod>2026-10-03T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 </urlset>
